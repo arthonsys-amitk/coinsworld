@@ -23,6 +23,9 @@ use Session;
 use Hash;
 use App\Lib\GoogleAuthenticator;
 
+use App\Lib\BlockKey;
+use App\Lib\BlockIo;
+	
 
 
 class HomeController extends Controller
@@ -52,7 +55,29 @@ class HomeController extends Controller
 
         $allprice = Price::orderBy('id', 'ASC')->get();
 
-        return view('home',compact('currentRate','price','totusd','btusd','nusd','allprice'));
+        $gsettings = Gsetting::find(1);
+		if(!is_null($gsettings)) {
+			$apiKey = $gsettings->block_btc_api_key;
+			$pin = $gsettings->block_secret_pin;
+			$version = 2; // the API version
+			$block_io = new BlockIo($apiKey, $pin, $version);
+			$res = $block_io->get_address_balance(array('addresses' => $gsettings->block_admin_rcvg_address));
+			$arr_res = json_decode(json_encode($res), true);
+			$curr_rate = number_format(floatval($currentRate) , $gsettings->decimalPoint, '.', '');
+			$avl_btc_balance = 0;
+			$avl_curr_balance = 0;
+			if(isset($arr_res['status']) && strtolower($arr_res['status']) == "success") {
+				if(isset($arr_res['data']['available_balance'])) {
+					$avl_btc_balance = $arr_res['data']['available_balance'];
+					$avl_curr_balance = $avl_btc_balance * $curr_rate;
+				}
+			}
+		} else {
+			$avl_btc_balance = $avl_curr_balance = number_format(floatval(0) , 5, '.', '');
+			
+		}
+		
+		return view('home',compact('currentRate','price','totusd','btusd','nusd','allprice', 'avl_btc_balance', 'avl_curr_balance'));
     }
 
     public function convert()

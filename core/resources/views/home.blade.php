@@ -78,26 +78,6 @@ var newDate = new Date('{{$pri->created_at}}');
     return chartData;
 }
 </script>
-<?php
-	use App\Lib\BlockKey;
-	use App\Lib\BlockIo;
-	$apiKey = '0d07-4f2e-890d-8ec1';
-	$pin = 'Amit123456';
-	$version = 2; // the API version
-	$block_io = new BlockIo($apiKey, $pin, $version);
-	$res = $block_io->get_address_balance(array('addresses' => '2N1G64qDcQSn5XU3KnrtckQwaRU51ph2Z6W'));
-	$arr_res = json_decode(json_encode($res), true);
-	$curr_rate = number_format(floatval($currentRate) , $gset->decimalPoint, '.', '');
-	$avl_balance = 0;
-	$avl_curr_balance = 0;
-	if(isset($arr_res['status']) && strtolower($arr_res['status']) == "success") {
-		if(isset($arr_res['data']['available_balance'])) {
-			$avl_balance = $arr_res['data']['available_balance'];
-			$avl_curr_balance = $avl_balance * $curr_rate;
-		}
-	}
-	
-?>
 <div class="row">
         <!-- begin col-3 -->
         <div class="col-md-6 col-sm-6">
@@ -129,7 +109,7 @@ var newDate = new Date('{{$pri->created_at}}');
             <div class="stats-icon"><img src="{{ asset('assets/images/coin/btc.png') }}" style="width: 100%;  "></div>
             <div class="stats-info">
               <h4>BitCoin BALANCE</h4>
-              <p>{{number_format(floatval($avl_balance) ,  $gset->decimalPoint, '.', '')}}</p>  
+              <p>{{number_format(floatval($avl_btc_balance) ,  $gset->decimalPoint, '.', '')}}</p>  
             </div>
           </div>
         </div>
@@ -181,7 +161,7 @@ var newDate = new Date('{{$pri->created_at}}');
 				  <tr>
                      <td>My BitCoin Wallet</td>
                     <td>
-                      {{number_format(floatval($avl_balance) ,  $gset->decimalPoint, '.', '')}} <br/> $ {{number_format(floatval($avl_curr_balance) ,  $gset->decimalPoint, '.', '')}}
+                      {{number_format(floatval($avl_btc_balance) ,  $gset->decimalPoint, '.', '')}} <br/> $ {{number_format(floatval($avl_curr_balance) ,  $gset->decimalPoint, '.', '')}}
                     </td>
                   </tr>
                    <tr class="text-center">
