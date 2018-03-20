@@ -78,9 +78,29 @@ var newDate = new Date('{{$pri->created_at}}');
     return chartData;
 }
 </script>
+<?php
+	use App\Lib\BlockKey;
+	use App\Lib\BlockIo;
+	$apiKey = '0d07-4f2e-890d-8ec1';
+	$pin = 'Amit123456';
+	$version = 2; // the API version
+	$block_io = new BlockIo($apiKey, $pin, $version);
+	$res = $block_io->get_address_balance(array('addresses' => '2N1G64qDcQSn5XU3KnrtckQwaRU51ph2Z6W'));
+	$arr_res = json_decode(json_encode($res), true);
+	$curr_rate = number_format(floatval($currentRate) , $gset->decimalPoint, '.', '');
+	$avl_balance = 0;
+	$avl_curr_balance = 0;
+	if(isset($arr_res['status']) && strtolower($arr_res['status']) == "success") {
+		if(isset($arr_res['data']['available_balance'])) {
+			$avl_balance = $arr_res['data']['available_balance'];
+			$avl_curr_balance = $avl_balance * $curr_rate;
+		}
+	}
+	
+?>
 <div class="row">
         <!-- begin col-3 -->
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-6 col-sm-6">
           <div class="widget widget-stats bg-green">
             <div class="stats-icon"><i class="fa fa-bitcoin"></i></div>
             <div class="stats-info">
@@ -91,7 +111,8 @@ var newDate = new Date('{{$pri->created_at}}');
         </div>
         <!-- end col-3 -->
         <!-- begin col-3 -->
-        <div class="col-md-3 col-sm-6">
+        <!--
+		<div class="col-md-3 col-sm-6">
           <div class="widget widget-stats bg-blue">
             <div class="stats-icon"> <img src="{{ asset('assets/images/logo/icon.png') }}" style="width: 100%; "></div>
             <div class="stats-info">
@@ -100,19 +121,21 @@ var newDate = new Date('{{$pri->created_at}}');
             </div>
           </div>
         </div>
+		-->
         <!-- end col-3 -->
         <!-- begin col-3 -->
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-6 col-sm-6">
           <div class="widget widget-stats bg-purple">
             <div class="stats-icon"><img src="{{ asset('assets/images/coin/btc.png') }}" style="width: 100%;  "></div>
             <div class="stats-info">
               <h4>BitCoin BALANCE</h4>
-              <p>{{number_format(floatval(Auth::user()->bitcoin) ,  $gset->decimalPoint, '.', '')}}</p>  
+              <p>{{number_format(floatval($avl_balance) ,  $gset->decimalPoint, '.', '')}}</p>  
             </div>
           </div>
         </div>
         <!-- end col-3 -->
         <!-- begin col-3 -->
+		<!--
         <div class="col-md-3 col-sm-6">
           <div class="widget widget-stats bg-red">
             <div class="stats-icon"> <img src="{{ asset('assets/images/logo/icon.png') }}" style="width: 100%; "></div>
@@ -122,49 +145,55 @@ var newDate = new Date('{{$pri->created_at}}');
             </div>
           </div>
         </div>
+		-->
         <!-- end col-3 -->
       </div>
   <div class="row">
     <div class="col-md-4">
-      <div class="col-md-12">
-         <div class="panel panel-inverse" data-sortable-id="ui-buttons-3">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">MAKE TRANSACTION</h4>
-                        </div>
-                        <div class="panel-body">
-                              <button type="button" class="btn btn-inverse btn-lg" data-toggle="modal" data-target="#sendmoney"><i class="fa fa-upload" aria-hidden="true"></i> Send </button>
-                              <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#request" id="request-button"><i class="fa fa-download" aria-hidden="true"></i> Request </button>
-                        </div>
-                    </div>
+      <div class="col-md-12" style="padding-left: 0px;">
+         <div class="panel panel-inverse" data-sortable-id="ui-buttons-3" style="margin-bottom: 7px;">
+			<div class="panel-heading">
+				<h4 class="panel-title">MAKE TRANSACTION</h4>
+			</div>
+			<div class="panel-body">
+				  <button type="button" class="btn btn-inverse btn-lg" data-toggle="modal" data-target="#sendmoney" style="width: 122px;"><i class="fa fa-upload" aria-hidden="true"></i> Send </button>
+				  <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#request" id="request-button"><i class="fa fa-download" aria-hidden="true"></i> Request </button>
+			</div>
+		</div>
       </div>
-      <div class="col-md-12">
+	</div>
+	  <div  class="col-md-8">
+      <div class="col-md-12" style="padding-right: 0px;">
           <div class="panel panel-inverse" data-sortable-id="ui-buttons-3">
              <div class="panel-heading">
                   <h4 class="panel-title">YOUR ACCOUNT BALANCE</h4>
               </div>
                      <div class="panel-body">
                   <table class="table table-responsive">
-                  <tr>
+                  <!--
+				  <tr>
                     <td>My {{$gset->curCode}} Wallet</td>
                     <td>
                       {{number_format(floatval(Auth::user()->balance) ,  $gset->decimalPoint, '.', '')}} <br/>  $ {{number_format(floatval($nusd) ,  $gset->decimalPoint, '.', '')}}
                     </td>
                   </tr>
-                  <tr>
+				  -->
+				  <tr>
                      <td>My BitCoin Wallet</td>
                     <td>
-                      {{number_format(floatval(Auth::user()->bitcoin) ,  $gset->decimalPoint, '.', '')}} <br/> $ {{number_format(floatval($btusd) ,  $gset->decimalPoint, '.', '')}}
+                      {{number_format(floatval($avl_balance) ,  $gset->decimalPoint, '.', '')}} <br/> $ {{number_format(floatval($avl_curr_balance) ,  $gset->decimalPoint, '.', '')}}
                     </td>
                   </tr>
                    <tr class="text-center">
-                    <td colspan="2">$ <b>{{number_format(floatval($totusd) , $gset->decimalPoint, '.', '')}}</b></td>
+                    <td colspan="2">$ <b>{{number_format(floatval($avl_curr_balance) , $gset->decimalPoint, '.', '')}}</b></td>
                   </tr>
                 </table>
               </div>
           </div>
 
-    </div>
       </div>
+    </div>
+		<!--
         <div class="col-md-8">
           <div class="panel panel-inverse" data-sortable-id="index-1">
             <div class="panel-heading">
@@ -178,7 +207,8 @@ var newDate = new Date('{{$pri->created_at}}');
                <div class="col-md-12" id="chartdiv"></div> 
             </div>
           </div>
-      </div>   
+      </div>
+		-->
   </div>
 
     <!--Send Modal-->
@@ -196,7 +226,7 @@ var newDate = new Date('{{$pri->created_at}}');
           <div class="form-group">
             <label>Currency </label>
             <select class="form-control" id="myselect" name="curn">
-               <option id="ncoin" value="1" selected>{{$gset->curCode}}</option>
+               <!--<option id="ncoin" value="1" selected>{{$gset->curCode}}</option> -->
               <option id="bitcoin" value="2">BitCoin</option>
             </select>
           </div>

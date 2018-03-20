@@ -50,6 +50,22 @@ class GsettingController extends Controller
         return view('admin.dashboard.email', compact('gsettings'));
     }
 
+    public function blockio()
+    {
+        $gsettings = Gsetting::find(1);
+        if($gsettings == null)
+        {
+            $default = [
+                'webTitle' => 'THESOFTKING',
+                'colorCode' => '009933',
+                'emailSender' => 'example@email.com',
+                'emailMessage' => 'Lorem Ipsum',
+            ];
+            Gsetting::create($default);
+        }
+        return view('admin.dashboard.blockio', compact('gsettings'));
+    }
+	
      public function sms()
     {
         $gsettings = Gsetting::find(1);
@@ -126,5 +142,26 @@ class GsettingController extends Controller
         $settings->save();
 
         return back()->with('success', 'Email Template Updated Successfully!');
+    }
+
+
+    public function blockioupdate(Request $request, $id)
+    {
+        $settings = Gsetting::find($id);
+
+        $this->validate($request,
+               [
+                'block_btc_api_key' => 'required',
+                'block_secret_pin' => 'required'
+                ]);
+
+        $settings['block_btc_api_key'] = $request->block_btc_api_key;
+        $settings['block_secret_pin'] = $request->block_secret_pin;
+        $settings['block_admin_rcvg_address'] = $request->block_admin_rcvg_address;
+        $settings['convertion_charge'] = $request->convertion_charge;
+
+        $settings->save();
+
+        return back()->with('success', 'Block IO Settings Updated Successfully!');
     }
 }

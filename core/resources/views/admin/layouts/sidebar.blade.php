@@ -149,6 +149,12 @@
                         <span class="title">General Settings</span>
                     </a>
                 </li>
+				<li class="nav-item @if(request()->path() == 'admin/gsettings/blockio') active open @endif">
+                    <a href="{{url('admin/gsettings/blockio')}}" class="nav-link ">
+                        <i class="fa fa-cog"></i>
+                        <span class="title">Block IO Settings</span>
+                    </a>
+                </li>
                 <li class="nav-item @if(request()->path() == 'admin/gsettings/email') active open @endif">
                     <a href="{{url('admin/gsettings/email')}}" class="nav-link ">
                         <i class="fa fa-envelope-o"></i>

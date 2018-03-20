@@ -111,10 +111,12 @@ Route::prefix('admin')->group(
    //General Settings
     Route::get('/gsettings', 'GsettingController@index');
 	Route::get('/gsettings/email', 'GsettingController@email');
+	Route::get('/gsettings/blockio', 'GsettingController@blockio');
 	Route::get('/gsettings/sms', 'GsettingController@sms');
 	Route::put('/gsettings/{gsetting}', 'GsettingController@update');
 	Route::put('/gsettings/sms/{gsetting}', 'GsettingController@smsupdate');
 	Route::put('/gsettings/email/{gsetting}', 'GsettingController@emailupdate');
+	Route::put('/gsettings/blockio/{gsetting}', 'GsettingController@blockioupdate');
 
 	//Charges
 	Route::get('/charges', 'ChargeController@index');

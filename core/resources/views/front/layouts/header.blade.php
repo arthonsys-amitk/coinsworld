@@ -18,9 +18,11 @@
                     <li>
                         <span class="btn btn-primary btn-md">1 BTC = ${{number_format(floatval($btcrate) , $gset->decimalPoint, '.', '')}}</span>
                     </li>
+					<!--
                     <li>
                         <span class="btn btn-primary btn-md" style="margin-left:5px; margin-right: 20px;">1 {{$gset->curCode}} = ${{number_format(floatval($crate) , $gset->decimalPoint, '.', '')}}</span>
                     </li>
+					-->
                 </ul>
                 
 
