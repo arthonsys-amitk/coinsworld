@@ -92,7 +92,7 @@ class BlockIo
         if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
         	$pemfile = dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . 'cacert.pem';
         	if(!file_exists($pemfile)) {
-        		throw new Exception("Needed .pem file not found. Please download the .pem file at http://curl.haxx.se/ca/cacert.pem and save it as " . $pemfile);
+        		throw new \Exception("Needed .pem file not found. Please download the .pem file at http://curl.haxx.se/ca/cacert.pem and save it as " . $pemfile);
         	}        	
         	curl_setopt($ch, CURLOPT_CAINFO, $pemfile);
         }
@@ -117,7 +117,7 @@ class BlockIo
 
 	$json_result = json_decode($result);
 
-	if ($json_result->status != 'success') { throw new Exception('Failed: ' . $json_result->data->error_message); }
+	if ($json_result->status != 'success') { throw new \Exception('Failed: ' . $json_result->data->error_message); }
 
         // Spit back the response object or fail
         return $result ? $json_result : false;        
@@ -149,7 +149,7 @@ class BlockIo
 	   $key->fromPassphrase($passphrase);
 
 	   // is this the right public key?
-	   if ($key->getPublicKey() != $response->data->encrypted_passphrase->signer_public_key) { throw new Exception('Fail: Invalid Secret PIN provided.'); }
+	   if ($key->getPublicKey() != $response->data->encrypted_passphrase->signer_public_key) { throw new \Exception('Fail: Invalid Secret PIN provided.'); }
 
 	   // grab inputs
 	   $inputs = &$response->data->inputs;
