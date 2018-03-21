@@ -31,6 +31,8 @@ Route::get('/subscribe', 'SubscribeController@store')->name('subscribe');
 Route::get('/', 'FrontController@index')->name('index');
 Route::get('/page/{page}', 'FrontController@page')->name('page');
 Route::get('/contact', 'FrontController@contact')->name('contact');
+Route::get('/about', 'FrontController@about')->name('about');
+Route::get('/blog', 'FrontController@blog')->name('blog');
 Route::post('/contact/mail', 'FrontController@conmail')->name('contact.mail');
 
 Route::get('/unauthorized', 'FrontController@unauthorized')->name('unauthorized');

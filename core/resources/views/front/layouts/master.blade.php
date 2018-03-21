@@ -1,112 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{$gset->webTitle}} | {{$gset->subtitle}}</title>
-        <!--Favicon add-->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logo/icon.png') }}">
-        <!--bootstrap Css-->
-        <link href="{{ asset('assets/front/css/bootstrap.min.css') }}" rel="stylesheet">
-        <!--font-awesome Css-->
-        <link href="{{ asset('assets/front/css/font-awesome.min.css') }}" rel="stylesheet">
-        <!-- Lightcase  Css-->
-        <link href="{{ asset('assets/front/css/lightcase.css') }}" rel="stylesheet">
-        <!--Slick Slider Css-->
-        <link href="{{ asset('assets/front/css/slick.css') }}" rel="stylesheet">
-        <!--Slick Nav Css-->
-        <link href="{{ asset('assets/front/css/slicknav.min.css') }}" rel="stylesheet">
-        <!--Swiper  Css-->
-        <link href="{{ asset('assets/front/css/swiper.min.css') }}" rel="stylesheet">
-        <!--Style Css-->
-        <link href="{{ asset('assets/front/css/style.css') }}" rel="stylesheet">
-        <!--Responsive Css-->
-        <link href="{{ asset('assets/front/css/responsive.css') }}" rel="stylesheet">
-         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-
-  <link rel="stylesheet" href="{{ asset('assets/front/2/css/style.css')}}">
-  <script src="{{ asset('assets/front/2/js/modernizr.js')}}"></script>
-
-       <!-- Chart -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-
-   
-        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Coinsworld</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/media_query.css') }}">
+        <link href="{{ asset('assets/coinsworld/css/skdslider.css') }}" rel="stylesheet">
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+                  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+                <![endif]-->
     </head>
 
-<body  data-spy="scroll">
-            <!-- Start Pre-Loader-->
-  
-<div id="preloader">
-    <div data-loader="circle-side"></div>
+    <body>
 
-  </div>
-  <!-- End Preload -->
-  
-  <!-- End Pre-Loader -->
-    <!--support bar  top start-->
-    <div class="support-bar-top" id="raindrops-green">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                  <div class="contact-info">
-                    <a href="mailto:{{$contact->email}}"> <i class="fa fa-envelope email" aria-hidden="true"></i>{{$contact->email}}</a>
-                  </div>
+        <div class="top_head">
+            <div class="container">
+                <div class="call_mail_wrp">
+                    <ul>
+                        <li><span>Call:</span> {!!$contact->mobile!!}</li>
+                        <li><span>Mail:</span> {!!$contact->email!!}</li>
+                    </ul>
                 </div>
-                <div class="col-md-6 text-right">
-                    <div class="contact-admin">
-                    @auth
-                      <a href="{{route('home')}}"><i class="fa fa-user"></i> HOME </a>
-                    @else
-                      <a href="{{route('login')}}"><i class="fa fa-user"></i> LOGIN </a>
-                      <a href="{{route('register')}}"><i class="fa fa-user-plus"></i> REGISTER</a>
-                    @endauth
+
+                <div class="log_signup_wrp">
+                    <ul>
+                        <li>
+                            <div class="lan_sec">
+                                <select id="language" name="language" required="required">
+                                    <option value="1">English</option>
+                                    <option value="0">Arabic</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li><a href="#" data-toggle="modal" data-target="#signin">Login</a></li>
+                        <li class="signup"><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <!-- Sign In Modal -->
+        <div id="signin" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                <div class="modal-content signin_pop">
+                    <div class="modal-body">
+                        <img src="{{ asset('assets/images/logo/logo.png') }}"/>
+                        <h1>Sign in here</h1>
+                        <div class="col-md-6 col-sm-6 m_auto">
+                            <form class="req_call_frm" method="post" action="{{ route('postLogin') }}">
+                                {{ csrf_field() }}
+                                <div class="req_call_wrp">
+                                    <input class="col-xs-12" name="username" placeholder="Username" type="text">
+                                    <div class="clearfix"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp">
+                                    <input class="col-xs-12" name="password" placeholder="Password" type="password">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp">
+                                    <input value="Sign In" type="submit">
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-    <!--support bar  top end-->
- <!--main menu section start-->   
-<nav class="main-menu">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="logo">
-                    <a href="{{url('/')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt=""></a>
+
+        <!-- Sign Up Modal -->
+        <!-- Sign Up Modal -->
+        <div id="signup" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-md">
+
+                <!-- Modal content-->
+                <div class="modal-content signin_pop">
+                    <div class="modal-body">
+                        <img src="images/logo.png"/>
+                        <h1>Sign up now</h1>
+                        <div class="col-md-12 col-sm-12 m_auto">
+                            <form class="req_call_frm" method="post">
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="First Name" type="text">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Last Name" type="text">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Username" type="text">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Email" type="email">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Password" type="password">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Confirm Password" type="password">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="Phone" type="text">
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-6 col-sm-6">
+                                    <select class="col-xs-12 select_country">
+                                        <option value="">-- Select Country --</option>
+                                        <option value="1">India</option>
+                                        <option value="2">USA</option>
+                                        <option value="3">Afganistan</option>
+                                    </select>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="req_call_wrp col-md-12 col-sm-12">
+                                    <input value="Sign up" type="submit">
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-9 text-right">
-                <ul id="header-menu" class="header-navigation">
-                    <li><a class="page-scroll" href="{{url('/')}}/#body"> Home</a></li>
-                    <li><a class="page-scroll" href="{{url('/')}}/#about"> about</a></li>
-                    <li><a class="page-scroll" href="{{url('/')}}/#graph"> Price Graph</a></li>
-                    <li><a class="page-scroll" href="{{url('/')}}/#timeline"> Timeline</a></li>
 
-                    
-                    
-                    <li><a class="page-scroll" href="#"> Account <span class="fa fa-angle-down"></span></a>
-                        <ul class="mega-menu mega-menu1 mega-menu2">
-                          <li class="mega-list mega-list1 ">
-                            <a class="page-scroll" href="{{ url('login') }}"> Login </a>
-                            <a class="page-scroll" href="{{ url('register') }}"> Register </a>
-                          </li>
-                        </ul>  
-                    </li>
-
-                </ul>
             </div>
         </div>
-    </div>
-</nav>
+
+
+        <nav class="navbar navbar-default navbar-static-top mynavbar-default menu_logo">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('assets/images/logo/logo.png')}}" alt="logo" /></a>
+
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="{{url('/')}}">Home</a></li>
+                        <li><a href="{{url('/about')}}">About</a></li>
+                        <li><a href="{{url('/service')}}">Service</a></li>                        
+                        <!--<li><a href="pages.html">Pages</a></li>-->
+                        <li><a href="{{url('/blog')}}">Blog</a></li>
+                        <li><a href="{{url('/contact')}}">Contact</a></li>
+                        <!--<li class="get_quote"><a href="#">Get a Quote?</a></li>-->
+                    </ul>
+                </div>
+                <!--/.nav-collapse --> 
+            </div>
+        </nav>
   <!--main menu section end-->
 @include('front.layouts.message')
 @yield('content')
@@ -124,41 +190,16 @@
     visibility: hidden;
 }
 </style>
-    <!--jquery script load-->
-{{--     <script src="{{ asset('assets/front/js/jquery.js') }}"></script> --}}
-    <!--Bootstrap v3 script load here-->
-    <script src="{{ asset('assets/front/js/bootstrap.min.js') }}"></script>
-    <!-- Highlight script load-->
-    <script src="{{ asset('assets/front/js/highlight.min.js') }}"></script>
-    <!--Jquery Ui Slider script load-->
-    <script src="{{ asset('assets/front/js/jquery-ui-slider.min.js') }}"></script>
-    <!--Circleful Js File Load-->
-    <script src="{{ asset('assets/front/js/jquery.circliful.js') }}"></script>
-    <!--CounterUp script load-->
-    <script src="{{ asset('assets/front/js/jquery.counterup.min.js') }}"></script>
-    <!-- Ripples  script load-->
-    <script src="{{ asset('assets/front/js/jquery.ripples-min.js') }}"></script>
-    <!--Slick Nav Js File Load-->
-    <script src="{{ asset('assets/front/js/jquery.slicknav.min.js') }}"></script> 
-    <!--Lightcase Js File Load-->
-    <script src="{{ asset('assets/front/js/lightcase.js') }}"></script>
-    <!--particle Js File Load-->
-    <script src="{{ asset('assets/front/js/particles.min.js') }}"></script>
-    <!--particle custom Js File Load-->
-    <script src="{{ asset('assets/front/js/particles-custom.js') }}"></script>
-    <!--RainDrops script load-->
-    <script src="{{ asset('assets/front/js/raindrops.js') }}"></script>
-    <!--Easing script load-->
-    <script src="{{ asset('assets/front/js/easing-min.js') }}"></script>
-    <!--Slick Slider Js File Load-->
-    <script src="{{ asset('assets/front/js/slick.min.js') }}"></script>
-     <!--Swiper script load-->
-    <script src="{{ asset('assets/front/js/swiper.min.js') }}"></script>
-    <!--WayPoints script load-->
-    <script src="{{ asset('assets/front/js/waypoints.min.js') }}"></script>
-    <!--Main js file load-->
-    <script src="{{ asset('assets/front/js/main.js') }}"></script>
-    <script src="{{ asset('assets/front/2/js/main.js') }}"></script>
+
+        <!--jquery script load-->
+        <script type="text/javascript" src="{{ asset('assets/coinsworld/js/jquery-1.10.1.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('assets/coinsworld/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/coinsworld/js/skdslider.min.js') }}"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                jQuery('#demo1').skdslider({'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': false, 'showPlayButton': false, 'autoSlide': true, 'animationType': 'fading'});
+            });
+        </script>
     </body>
 </html>
 

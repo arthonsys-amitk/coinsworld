@@ -29,6 +29,8 @@ class FrontController extends Controller
 {
     public function index()
     {
+        $contact = Contac::latest()->first();
+
         $all = file_get_contents("https://blockchain.info/ticker");
         $res = json_decode($all);
         $currentRate = $res->USD->last;
@@ -55,9 +57,19 @@ class FrontController extends Controller
     	return view('front.single', compact('single','page'));
     }
 
+    public function about()
+    {
+        return view('front.about');
+    }
+
     public function contact()
     {
         return view('front.contact');
+    }
+
+    public function blog()
+    {
+        return view('front.blog');
     }
 
      public function conmail(Request $request)
