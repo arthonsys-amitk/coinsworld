@@ -25,7 +25,8 @@ use App\Lib\GoogleAuthenticator;
 
 use App\Lib\BlockKey;
 use App\Lib\BlockIo;
-	
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;	
 
 
 class HomeController extends Controller
@@ -61,17 +62,27 @@ class HomeController extends Controller
 			$pin = $gsettings->block_secret_pin;
 			$version = 2; // the API version
 			$block_io = new BlockIo($apiKey, $pin, $version);
-			$res = $block_io->get_address_balance(array('addresses' => $gsettings->block_admin_rcvg_address));
-			$arr_res = json_decode(json_encode($res), true);
-			$curr_rate = number_format(floatval($currentRate) , $gsettings->decimalPoint, '.', '');
+			
+			$curr_user_id = Auth::id();		
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			$address = $address_label = '';
 			$avl_btc_balance = 0;
 			$avl_curr_balance = 0;
-			if(isset($arr_res['status']) && strtolower($arr_res['status']) == "success") {
-				if(isset($arr_res['data']['available_balance'])) {
-					$avl_btc_balance = $arr_res['data']['available_balance'];
-					$avl_curr_balance = $avl_btc_balance * $curr_rate;
+			if($user_rec) {
+				$address = $user_rec->address;
+				$address_label = $user_rec->address_label;
+				$res = $block_io->get_address_balance(array('addresses' => $address));
+				$arr_res = json_decode(json_encode($res), true);
+				$curr_rate = number_format(floatval($currentRate) , $gsettings->decimalPoint, '.', '');
+				
+				if(isset($arr_res['status']) && strtolower($arr_res['status']) == "success") {
+					if(isset($arr_res['data']['available_balance'])) {
+						$avl_btc_balance = $arr_res['data']['available_balance'];
+						$avl_curr_balance = $avl_btc_balance * $curr_rate;
+					}
 				}
-			}
+			}			
+			
 		} else {
 			$avl_btc_balance = $avl_curr_balance = number_format(floatval(0) , 5, '.', '');
 			

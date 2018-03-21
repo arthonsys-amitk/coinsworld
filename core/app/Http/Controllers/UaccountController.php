@@ -13,9 +13,43 @@ use App\Withdraw;
 use App\Price;
 use Auth;
 
+use App\Lib\BlockKey;
+use App\Lib\BlockIo;
+use App\Useraddresses;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 class UaccountController extends Controller
 {
-    public function requestMoney()
+	
+	public function requestMoney() {
+		$gset = Gsetting::first();
+		$curr_user_id = Auth::id();
+		
+		$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+		$address = $address_label = '';
+		if($user_rec) {
+			$address = $user_rec->address;
+			$address_label = $user_rec->address_label;
+		}
+
+        if($address)
+        {
+			$var = $gset->curCode.":".$address;
+			$uac['user_id'] = Auth::id();
+			$uac['accnum'] = $address;
+			$uac['code'] =  "<img src=\"https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$var&choe=UTF-8\" title='' style='width:300px;' />";
+
+			return $uac;
+		}
+	    else
+	    {
+			$err = "Please Reload The Page";
+			return $err;
+	    }		
+	}
+	
+	public function requestMoneyOld()
     {
         $gset = Gsetting::first();
 
