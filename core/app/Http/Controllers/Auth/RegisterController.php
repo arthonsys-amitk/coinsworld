@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Gsetting;
 use App\User;
+use App\Useraddresses;
+
+use App\Lib\BlockKey;
+use App\Lib\BlockIo;
+use Illuminate\Support\Facades\Log;
+
 
 class RegisterController extends Controller
 {
@@ -69,8 +75,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $gset = Gsetting::first();
-
-              return User::create([
+		
+		$ret = User::create([
                     'username' => $data['username'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
@@ -88,6 +94,37 @@ class RegisterController extends Controller
                     'emailv' =>  $gset->emailVerify,
                     'smsv' =>  $gset->smsVerify,
             ]);
+		
+		$user_id = $ret->id; //new user id
+		
+		$gsettings = Gsetting::find(1);
+		$user_btc_address = "";
+		if(!is_null($gsettings)) {
+			$apiKey = $gsettings->block_btc_api_key;
+			$pin = $gsettings->block_secret_pin;
+			$version = 2; // the API version
+			$block_io = new BlockIo($apiKey, $pin, $version);
+			
+			$address_label = uniqid($data['username'] . "_");
+			$res = $block_io->get_new_address(array('label' => $address_label));
+			$arr_res = json_decode(json_encode($res), true);
+			//Log::info("address:" . print_r($arr_res, true));
+			if(isset($arr_res['status']) && (strtolower($arr_res['status']) == "success")) {
+				if(isset($arr_res['data']['address']) && $arr_res['data']['address']) {
+					$user_btc_address = $arr_res['data']['address'];
+					$uaret = Useraddresses::create([
+						'user_id' => $user_id,
+						'address' => $user_btc_address,
+						'address_label' => $address_label,
+						'is_archived' => 0
+					]);
+					//Log::info("address-db:" . print_r($uaret, true));
+				}
+			}
+		}
+		
+              
+			return $ret;
 
 
     }
