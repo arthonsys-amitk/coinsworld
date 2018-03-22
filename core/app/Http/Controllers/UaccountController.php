@@ -87,50 +87,72 @@ class UaccountController extends Controller
 		
 		$sender = User::find(Auth::id());
 		
-		$curr_user_id = Auth::id();		
-		$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
-		if(!is_null($user_rec)) {
-			$sender_address = $user_rec->address;
-			$sender_address_label = $user_rec->address_label;
-			
-			$gsettings = Gsetting::first();
-			$conversion_charge = $gsettings->convertion_charge;
-			$apiKey = $gsettings->block_btc_api_key;
-			$pin = $gsettings->block_secret_pin;
-			$version = 2; // the API version
-			$block_io = new BlockIo($apiKey, $pin, $version);
-			
-			$res = $block_io->get_address_balance(array('addresses' => $sender_address));
-			$arr_res = json_decode(json_encode($res), true);
-			$sender_avl_btc_balance = $arr_res['data']['available_balance'];
-			
-			$res_rcvr = $block_io->get_address_balance(array('addresses' => $rcvr_address));
-			if(!is_null($res_rcvr)) {
-				$arr_res_rcvr = json_decode(json_encode($res_rcvr), true);
-				$rcvr_avl_btc_balance = $arr_res_rcvr['data']['available_balance'];
+		try {
+			$curr_user_id = Auth::id();		
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			if(!is_null($user_rec)) {
+				$sender_address = $user_rec->address;
+				$sender_address_label = $user_rec->address_label;
+				
+				$gsettings = Gsetting::first();
+				$conversion_charge = $gsettings->convertion_charge;
+				Log::info("Conversion charge:" . $conversion_charge);
+				$apiKey = $gsettings->block_btc_api_key;
+				$pin = $gsettings->block_secret_pin;
+				$version = 2; // the API version
+				$block_io = new BlockIo($apiKey, $pin, $version);
+				
+				$admin_rcvg_address = $gsettings->block_admin_rcvg_address;
+				
+				$res = $block_io->get_address_balance(array('addresses' => $sender_address));
+				$arr_res = json_decode(json_encode($res), true);
+				$sender_avl_btc_balance = $arr_res['data']['available_balance'];
+				
+				$res_rcvr = $block_io->get_address_balance(array('addresses' => $rcvr_address));
+				if(!is_null($res_rcvr)) {
+					$arr_res_rcvr = json_decode(json_encode($res_rcvr), true);
+					$rcvr_avl_btc_balance = $arr_res_rcvr['data']['available_balance'];
+				} else {
+					return back()->with('alert', 'Invalid Receiver Wallet Address');  
+				}
+				$commission = number_format(($conversion_charge * $trf_amount /100), $gsettings->decimalPoint, '.', '');
+				$total_amount = number_format(($trf_amount + $commission), $gsettings->decimalPoint, '.', '');
+				Log::info("commission:" . $commission . "trf_amount:" . $trf_amount . ", total amt:" . $total_amount . ", decimals:" . $gsettings->decimalPoint);
+				$feeobj = $block_io->get_network_fee_estimate(array('amounts' => "{$total_amount}", 'to_addresses' => "{$rcvr_address}"));
+				$arr_feeobj = json_decode(json_encode($feeobj), true);
+				$network_fee_estimate = 0.00;
+				if(isset($arr_feeobj['status']) && (strtolower($arr_feeobj['status']) == "success")) {
+					$network_fee_estimate = $arr_feeobj['data']['estimated_network_fee'];
+				}
+				Log::info("network fee estimate:" . $network_fee_estimate);
+				$total_charges = number_format(($commission + $network_fee_estimate),$gsettings->decimalPoint, '.', '');
+				$total_withdrawal_amt = number_format(($total_charges + $trf_amount), $gsettings->decimalPoint, '.', '');
+				if($sender_avl_btc_balance < $total_charges) {
+					return back()->with('alert', 'Insufficient Balance');
+				}
+				
+				$trf_amt_formatted = number_format($trf_amount, $gsettings->decimalPoint, '.', '');
+				if($commission < 0.00001) $commission = "0.00001";
+				Log::info("commission= $commission");
+				if($commission) {
+					Log::info("sending {$trf_amt_formatted} to {$rcvr_address}, and, {$commission} to {$admin_rcvg_address} from {$sender_address}");
+					$trf_res = $block_io->withdraw_from_addresses(array('amounts' => "{$trf_amt_formatted},{$commission}" , 'from_addresses' => "{$sender_address},{$sender_address}", 'to_addresses' => "{$rcvr_address},{$admin_rcvg_address}"));
+				} else {
+					$trf_res = $block_io->withdraw_from_addresses(array('amounts' => "{$trf_amt_formatted}" , 'from_addresses' => "{$sender_address}", 'to_addresses' => "{$rcvr_address}"));
+				}
+				if(!is_null($trf_res)) {
+					$arr_trf_res = json_decode(json_encode($trf_res), true);
+					Log::info("transfer result:" . print_r($arr_trf_res, true));
+					send_email($sender->email, $sender->username, 'Sent BitCoin', 'Bitcoin transfer was successful');
+					return redirect()->route('home')->withSuccess('BitCoin Sent Successfuly');
+				} else {
+					return back()->with('alert', 'Transaction could not be completed');
+				}
 			} else {
-				return back()->with('alert', 'Invalid Receiver Wallet Address');  
+				return back()->with('alert', 'Invalid Wallet Address');
 			}
-			$commission = number_format(($conversion_charge * $trf_amount /100), $gsettings->decimalPoint, '.', '');
-			$total_amount = number_format(($trf_amount + $commission), $gsettings->decimalPoint, '.', '');
-			Log::info("commission:" . $commission . "trf_amount:" . $trf_amount . ", total amt:" . $total_amount . ", decimals:" . $gsettings->decimalPoint);
-			$network_fee_estimate = $block_io->get_network_fee_estimate(array('amounts' => "'". $total_amount . "'", 'to_addresses' => "'". $rcvr_address . "'" ));
-			$total_charges = number_format(($commission + $network_fee_estimate),$gsettings->decimalPoint, '.', '');
-			if($sender_avl_btc_balance < $total_charges) {
-				return back()->with('alert', 'Insufficient Balance');
-			}
-			
-			$trf_res = $block_io->withdraw_from_addresses(array('amounts' => "'". number_format($total_amount, $gsettings->decimalPoint, '.', '')  . "'" , 'from_addresses' => "'". $sender_address . "'", 'to_addresses' => "'". $rcvr_address . "'"));
-			if(!is_null($trf_res)) {
-				$arr_trf_res = json_decode(json_encode($trf_res), true);
-				Log::info("transfer result:" . print_r($arr_trf_res, true));
-				send_email($sender->email, $sender->username, 'Sent BitCoin', 'Bitcoin transfer was successful');
-				return redirect()->route('home')->withSuccess('BitCoin Sent Successfuly');
-			} else {
-				return back()->with('alert', 'Transaction could not be completed');
-			}
-		} else {
-			return back()->with('alert', 'Invalid Wallet Address');  
+		} catch(\Exception $e) {
+			return back()->with('alert', 'Exception occurred.' . $e->getMessage());  
 		}
 	}
 	

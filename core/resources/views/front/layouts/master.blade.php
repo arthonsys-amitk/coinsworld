@@ -154,12 +154,18 @@
                                 </div>
 
                                 <div class="req_call_wrp col-md-6 col-sm-6">
-                                    <input class="col-xs-12" placeholder="Phone" type="text">
+                                    <input class="col-xs-12" placeholder="Mobile" type="text" id="mobile" name="mobile">
                                     <div class="clearfix"></div>
                                 </div>
 
-                                <div class="req_call_wrp col-md-6 col-sm-6">
-                                    <select name="country" id="country" class="col-xs-12 select_country" >
+								<div class="req_call_wrp col-md-6 col-sm-6">
+                                    <input class="col-xs-12" placeholder="City" type="text" id="city" name="city">
+                                    <div class="clearfix"></div>
+                                </div>
+								
+								
+                                <div class="req_call_wrp col-md-12 col-sm-12">
+                                    <select name="country" id="country"  class="select_country" >
 										  <option value="Afghanistan">Afghanistan</option>
 										  <option value="Albania">Albania</option>
 										  <option value="Algeria">Algeria</option>
@@ -398,6 +404,7 @@
 										  <option value="Yemen">Yemen</option>
 										  <option value="Yugoslavia">Yugoslavia</option>
 										  <option value="Zambia">Zambia</option>
+										  <option value="Zimbabwe">Zimbabwe</option>
 									</select>
 									@if ($errors->has('country'))
 									<span class="help-block">
@@ -470,6 +477,7 @@
                 jQuery('#demo1').skdslider({'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': false, 'showPlayButton': false, 'autoSlide': true, 'animationType': 'fading'});
             });
         </script>
+
     </body>
 </html>
 

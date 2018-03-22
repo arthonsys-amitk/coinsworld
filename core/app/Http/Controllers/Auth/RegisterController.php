@@ -59,9 +59,9 @@ class RegisterController extends Controller
             'password' => 'required|string|min:5|confirmed',            
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            //'city' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            //'mobile' => 'required|string|max:255',
+            'mobile' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users'
         ]);
     }
@@ -82,9 +82,9 @@ class RegisterController extends Controller
                     'password' => bcrypt($data['password']),
                     'firstname' => $data['firstname'],
                     'lastname' => $data['lastname'],
-                    //'city' => $data['city'],
+                    'city' => $data['city'],
                     'country' => $data['country'],
-                    //'mobile' => $data['mobile'],
+                    'mobile' => $data['mobile'],
                     'balance' => '00',
                     'status' => 1,
                     'bitcoin' => '00',

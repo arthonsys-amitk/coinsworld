@@ -11,6 +11,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     color: #333;
     font-size: 14px;
 }
+
 body {
     line-height: 1;
     overflow-x: hidden;
@@ -189,6 +190,8 @@ table {
 /*css by ravi*/
 .select_country{
     height: 48px;
+	width: 100%;
+	text-overflow:ellipsis;
     color: #80868f;
     font-size: 14px;
     border: none;
@@ -688,9 +691,6 @@ table {
     font-size: 18px;
     line-height: normal;
     margin: 30px 0;
-}
-.req_call_frm{
-    margin: 20px 0;
 }
 .req_call_wrp{
     margin: 0 0 20px;
@@ -1503,4 +1503,26 @@ p.copyrht{
 	box-shadow: 0 3px 8px #e4e4e4;
 	margin: 0;
 	padding: 6px 0;
+}
+/*-- custom-css--*/
+
+.circle-section{
+	width: 100%;
+    padding: 60px 0;
+}
+.req_call_frm input{
+	width:100%;
+}
+.panel-primary{
+	min-height:200px;
+}
+.panel-body p{
+	margin:11px 0;
+}
+.panel-primary > .panel-heading{
+	background:#6396fc;
+}
+.btn-primary{
+	background:#6396fc;
+	border-color: #6396fc;
 }
