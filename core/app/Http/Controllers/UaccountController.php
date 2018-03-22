@@ -144,37 +144,40 @@ class UaccountController extends Controller
 				$arr_trf_res = array();
 				if(!is_null($trf_res)) {
 					$arr_trf_res = json_decode(json_encode($trf_res), true);
-					Log::info("transfer result:" . print_r($arr_trf_res, true));
+					//Log::info("transfer result:" . print_r($arr_trf_res, true));
 					send_email($sender->email, $sender->username, 'Sent BitCoin', 'Bitcoin transfer was successful');
+					
+					////////////////////record transactuion details to DB ////////////////
+					//fetch current balance of sender
+					$bal_res = $block_io->get_address_balance(array('addresses' => $sender_address));
+					$sender_balance = 0;
+					if(!is_null($bal_res)) {
+						$bal_arr = json_decode(json_encode($bal_res), true);
+						if(isset($bal_arr['status']) && strtolower($bal_arr['status']) == "success") {
+							$sender_balance = $bal_arr['data']['available_balance'];
+						}					
+					}
+					$rlog['user_id'] =  $curr_user_id;
+					$rlog['trxid'] = isset($arr_trf_res['data']['txid']) ? $arr_trf_res['data']['txid']: "";
+					$rlog['toacc'] = $rcvr_address;
+					$rlog['amount'] = $trf_amt_formatted;
+					$rlog['charge'] = isset($arr_trf_res['data']['network_fee']) ? $arr_trf_res['data']['network_fee']: '0';
+					$rlog['blockio_fee'] = isset($arr_trf_res['data']['blockio_fee']) ? $arr_trf_res['data']['blockio_fee']: '0';
+					$rlog['commission'] = $commission;
+					$rlog['flag'] = 0;
+					$rlog['status'] = 0; //1 for received, 0 for sent
+					$rlog['balance'] = $sender_balance;
+					$rlog['desc'] = $notes;
+					
+					$ret = Uwdlog::create($rlog);					
+					
+					/////////////////////////////////////////////////////////////////////////////
+					
+					
 					return redirect()->route('home')->withSuccess('BitCoin Sent Successfuly');
 				} else {
 					return back()->with('alert', 'Transaction could not be completed');
 				}
-				
-				////////////////////record transactuion details to DB ////////////////
-				//fetch current balance of sender
-				$bal_res = $block_io->get_address_balance(array('addresses' => $sender_address));
-				$sender_balance = 0;
-				if(!is_null($bal_res)) {
-					$bal_arr = json_decode(json_encode($bal_res), true);
-					if(isset($bal_arr['status']) && strtolower($bal_arr['status']) == "success") {
-						$sender_balance = $bal_arr['data']['available_balance'];
-					}					
-				}
-				$rlog['user_id'] =  $curr_user_id;
-				$rlog['trxid'] = isset($arr_trf_res['data']['txid']) ? $arr_trf_res['data']['txid']: "";
-				$rlog['toacc'] = $rcvr_address;
-				$rlog['amount'] = $trf_amt_formatted;
-				$rlog['charge'] = isset($arr_trf_res['data']['network_fee']) ? $arr_trf_res['data']['network_fee']: '0';
-				$rlog['blockio_fee'] = isset($arr_trf_res['data']['blockio_fee']) ? $arr_trf_res['data']['blockio_fee']: '0';
-				$rlog['commission'] = $commission;
-				$rlog['flag'] = 0;
-				$rlog['status'] = 0; //1 for received, 0 for sent
-				$rlog['balance'] = $sender_balance;
-				$rlog['desc'] = $notes;
-				Uwdlog::create($rlog);
-				/////////////////////////////////////////////////////////////////////////////
-				
 			} else {
 				return back()->with('alert', 'Invalid Wallet Address');
 			}

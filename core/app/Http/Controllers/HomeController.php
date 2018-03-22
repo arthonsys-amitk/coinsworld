@@ -27,7 +27,7 @@ use App\Lib\BlockKey;
 use App\Lib\BlockIo;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;	
-
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
@@ -47,8 +47,10 @@ class HomeController extends Controller
 
         $all = file_get_contents("https://blockchain.info/ticker");
         $res = json_decode($all);
-        $currentRate = $res->USD->last;
-        $price = Price::latest()->first();
+        
+		$currentRate = $res->USD->last;
+		
+		$price = Price::latest()->first();
 
         $btusd = Auth::user()->bitcoin * $currentRate;
         $nusd = Auth::user()->balance * $price->price;
@@ -113,8 +115,53 @@ class HomeController extends Controller
 
     public function bittrans()
     {
-        $trans = Uwdlog::where('user_id', Auth::user()->id )->where('flag','0')->orderBy('id', 'desc')->paginate(10);
+        $trans = Uwdlog::where('user_id', Auth::user()->id )->where('flag','0')->orderBy('id', 'desc')->paginate(25);
         return view('front.user.bitlog',compact('trans'));
+    }
+
+    public function bittransrcvd()
+    {
+        //$trans = Uwdlog::where('user_id', Auth::user()->id )->where('flag','0')->orderBy('id', 'desc')->paginate(10);
+		
+		$trans = array();
+		$gsettings = Gsetting::first();
+		if(!is_null($gsettings)) {
+			$apiKey = $gsettings->block_btc_api_key;
+			$pin = $gsettings->block_secret_pin;
+			$version = 2; // the API version
+			$block_io = new BlockIo($apiKey, $pin, $version);
+			
+			$curr_user_id = Auth::id();		
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			$address = $address_label = '';
+			$avl_btc_balance = 0;
+			$avl_curr_balance = 0;
+			if($user_rec) {
+				$address = $user_rec->address;
+				$address_label = $user_rec->address_label;
+				
+				$transobj = $block_io->get_transactions(array('type' => 'received', 'addresses' => "{$address}"));
+				if(!is_null($transobj)) {
+					$arr_trans_list = json_decode(json_encode($transobj), true);
+					if(isset($arr_trans_list['status']) && strtolower($arr_trans_list['status']) == "success") {
+						$arr_trans = $arr_trans_list['data']['txs'];
+						foreach($arr_trans as $tran){
+							$obj_tran_dtl = new \stdClass();
+							$obj_tran_dtl->status = 1;
+							$obj_tran_dtl->toacc = $tran['senders'][0];
+							$obj_tran_dtl->created_at = gmdate("Y-m-d H:i:s", $tran['time']);
+							$obj_tran_dtl->amount = $tran['amounts_received'][0]['amount'];
+							$trans[] = $obj_tran_dtl;
+							$obj_tran_dtl = null;
+						}
+					}
+				}
+			}
+			
+		}
+		
+		
+        return view('front.user.bitlogrcvd',compact('trans'));
     }
 
     public function cointrans()

@@ -22,9 +22,9 @@
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav">
-          <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li {{{ (Request::is('home') ? 'class=active' : '') }}}><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           
-          <li class="has-sub">
+          <li class="has-sub {{{ ((Request::is('home/bitlog') || Request::is('home/bitlogrcvd'))? 'active' : '') }}}">
             <a href="javascript:;">
                 <b class="caret pull-right"></b>
                 <i class="fa fa-th"></i>
@@ -36,8 +36,11 @@
                 <a href="{{route('coinlog')}}"><img src="{{ asset('assets/images/logo/icon.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> {{$gset->curCode}}</a>
               </li>
 			  -->
-              <li><a href="{{route('bitlog')}}">
-                    <img src="{{ asset('assets/images/coin/btc.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> BitCoin</a>
+              <li {{{ (Request::is('home/bitlog') ? 'class=active' : '') }}}><a href="{{route('bitlog')}}">
+                    <img src="{{ asset('assets/images/coin/btc.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> Sent</a>
+              </li> 
+			  <li {{{ (Request::is('home/bitlogrcvd') ? 'class=active' : '') }}}><a href="{{route('bitlogrcvd')}}">
+                    <img src="{{ asset('assets/images/coin/btc.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> Received</a>
               </li> 
             </ul>
           </li>
@@ -49,8 +52,8 @@
             <li><a href="{{route('convert')}}""><i class="fa fa-arrows" aria-hidden="true"></i> <span>Convert</span></a></li>
 			-->
             <li>
-            <li ><a href="{{route('user.profile')}}"><i class="fa fa-user" aria-hidden="true"></i> <span>Profile</span></a></li>
-            <li>
+            <li {{{ (Request::is('user/profile') ? 'class=active' : '') }}}><a href="{{route('user.profile')}}"><i class="fa fa-user" aria-hidden="true"></i> <span>Profile</span></a></li>
+            <li {{{ (Request::is('change/password') ? 'class=active' : '') }}}>
                 <a href="{{route('changepass')}}"><i class="fa fa-lock" aria-hidden="true"></i> <span>Password</span></a>
             </li>
 			<!--

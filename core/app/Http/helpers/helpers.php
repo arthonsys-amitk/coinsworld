@@ -18,13 +18,14 @@ if (! function_exists('send_email')) {
 			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
 			$mm = str_replace("{{name}}",$name,$template);     
-			$message = str_replace("{{message}}",$message,$mm); 
+			//$message = str_replace("{{message}}",$message,$mm); 
 
 			if (mail($to, $subject, $message, $headers)) {
 			  // echo 'Your message has been sent.';
-			  Log::info("Your message has been sent to: $to");
+			  Log::info("Your email message has been sent to: $to");
 			} else {
 			 //echo 'There was a problem sending the email.';
+			 Log::info("Your email message COULD NOT be sent to: $to due to some error");
 			}
 
 		}

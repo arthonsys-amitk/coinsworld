@@ -56,6 +56,7 @@ Route::post('/user/update', 'HomeController@userupdate')->name('user.update');
 Route::get('/home/refered', 'HomeController@refered')->name('refered.users');
 Route::get('/home/transactions', 'HomeController@bittrans')->name('transactions');
 Route::get('/home/bitlog', 'HomeController@bittrans')->name('bitlog');
+Route::get('/home/bitlogrcvd', 'HomeController@bittransrcvd')->name('bitlogrcvd');
 Route::get('/home/coinlog', 'HomeController@cointrans')->name('coinlog');
 Route::get('/change/password', 'HomeController@changepass')->name('changepass');
 Route::post('/change/passw', 'HomeController@chnpass')->name('changep');

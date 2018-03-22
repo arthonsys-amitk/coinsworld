@@ -4,7 +4,7 @@
         <div class="row">
           <div class="panel panel-inverse">
             <div class="panel-heading">
-              <h4 class="panel-title">BitCoin Transaction Log - Sent</h4>
+              <h4 class="panel-title">BitCoin Transaction Log - Received</h4>
             </div>
             <div class="panel-body">
      <div class="col-md-12">
@@ -17,7 +17,7 @@
                 Operation
               </th>
               <th>
-                From / To
+                From
               </th>
               <th>
                 Processed at 
@@ -52,7 +52,7 @@
 @endforeach    
               </tbody>
           </table>
-          <?php echo $trans->render(); ?>
+          <?php //echo $trans->render(); ?>
              
             </div>
           </div>
