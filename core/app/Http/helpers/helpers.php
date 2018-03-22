@@ -1,6 +1,6 @@
 <?php
 use App\Gsetting;
-
+use Illuminate\Support\Facades\Log;
 
 if (! function_exists('send_email')) {
     
@@ -22,6 +22,7 @@ if (! function_exists('send_email')) {
 
 			if (mail($to, $subject, $message, $headers)) {
 			  // echo 'Your message has been sent.';
+			  Log::info("Your message has been sent to: $to");
 			} else {
 			 //echo 'There was a problem sending the email.';
 			}

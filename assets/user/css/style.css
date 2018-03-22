@@ -185,7 +185,7 @@ label {
     left: 50%;
     margin: -20px 0 0 -20px;
     border: 2px solid #fff;
-    border-top: 2px solid #24B498;
+    border-top: 2px solid #69f;
     border-radius: 100%
 }
 
@@ -199,7 +199,7 @@ label {
 
 .spinner-small {
     border: 2px solid rgba(0, 0, 0, .05);
-    border-top: 2px solid #24B498;
+    border-top: 2px solid #69f;
     height: 30px;
     width: 30px;
     margin: -15px 0 0 -15px
@@ -220,7 +220,7 @@ label {
 }
 
 .navbar.navbar-default {
-    background: #2e6a9c;
+    background: #fff;
 }
 
 .navbar.navbar-inverse {
@@ -415,7 +415,7 @@ label {
 
 .sidebar,
 .sidebar-bg {
-    background: #2d353c;
+    background: #69f;
     left: 0;
     width: 220px;
     top: 0;
@@ -446,7 +446,7 @@ label {
 .sidebar .nav>li>a {
     padding: 8px 20px;
     line-height: 20px;
-    color: #a8acb1
+    color: #fff;
 }
 
 .sidebar.sidebar-grid .nav>li>a {
@@ -480,12 +480,12 @@ label {
 .sidebar .nav>li.active>a:focus,
 .sidebar .nav>li.active>a:hover {
     color: #fff;
-    background: #00acac
+    background: #69f
 }
 
 .sidebar .nav>li.active>a .badge.badge-success,
 .sidebar .nav>li.active>a .label.label-success {
-    background: #008a8a
+    background: #69f
 }
 
 .sidebar .nav>li>a i {
@@ -593,7 +593,7 @@ label {
 }
 
 .sidebar .sub-menu>li.active>a:before {
-    color: #00acac
+    color: #69f
 }
 
 .sidebar .nav .sub-menu>li>a .caret {
@@ -634,7 +634,8 @@ label {
 .sidebar .nav>li.nav-profile {
     padding: 20px;
     color: #fff;
-    background: #1a2229
+    background: #0055ff;
+
 }
 
 .sidebar .nav>li.nav-profile a {
@@ -664,7 +665,7 @@ label {
 
 .sidebar .nav>li.nav-profile .info small {
     display: block;
-    color: #889097
+    color: #fff;
 }
 
 .sidebar .nav>li.nav-widget {
@@ -1008,15 +1009,15 @@ label {
 .has-success .help-block,
 .has-success .radio,
 .has-success .radio-inline {
-    color: #00acac
+    color: #69f
 }
 
 .has-success .form-control {
-    border-color: #00acac
+    border-color: #69f
 }
 
 .has-success .form-control:focus {
-    border-color: #008a8a
+    border-color: #69f
 }
 
 .has-warning .checkbox,
@@ -1093,7 +1094,7 @@ legend {
 .dropdown-menu>.active>a,
 .dropdown-menu>.active>a:focus,
 .dropdown-menu>.active>a:hover {
-    background: #348fe2
+    background: #69f
 }
 
 .dropdown-menu .divider {
@@ -1299,7 +1300,7 @@ legend {
 
 .badge.badge-success,
 .label.label-success {
-    background: #00acac
+    background: #69f
 }
 
 .badge.badge-info,
@@ -1309,7 +1310,7 @@ legend {
 
 .badge.badge-primary,
 .label.label-primary {
-    background: #348fe2
+    background: #69f
 }
 
 .badge.badge-inverse,
@@ -1419,13 +1420,13 @@ legend {
 }
 
 .progress-bar {
-    background: #348fe2;
+    background: #69f;
     -webkit-box-shadow: none;
     box-shadow: none
 }
 
 .progress-bar.progress-bar-success {
-    background-color: #00acac
+    background-color: #69f
 }
 
 .progress-bar.progress-bar-info {
@@ -1733,8 +1734,8 @@ legend {
 
 .btn.btn-primary {
     color: #fff;
-    background: #348fe2;
-    border-color: #348fe2
+    background: #69f;
+    border-color: #69f
 }
 
 .btn-primary.active,
@@ -1755,8 +1756,8 @@ legend {
 
 .btn.btn-success {
     color: #fff;
-    background: #00acac;
-    border-color: #00acac
+    background: #69f;
+    border-color: #69f
 }
 
 .btn.btn-success.active,
@@ -1766,13 +1767,13 @@ legend {
 .open>.dropdown-toggle.btn-success,
 .open>.dropdown-toggle.btn-success:focus,
 .open>.dropdown-toggle.btn-success:hover {
-    background: #008a8a;
-    border-color: #008a8a
+    background: #69f;
+    border-color: #69f
 }
 
 .btn-group .btn.btn-success:not(.active)+.btn.btn-success,
 .input-group-btn .btn.btn-success:not(.active)+.btn.btn-success {
-    border-left-color: #008a8a
+    border-left-color: #69f
 }
 
 .btn.btn-warning {
@@ -2024,7 +2025,7 @@ legend {
 }
 
 .panel-success>.panel-heading {
-    background: #008a8a
+    background: #69f
 }
 
 .panel-warning>.panel-heading {
@@ -2462,7 +2463,7 @@ ul.tagit li.tagit-choice .tagit-close:hover {
 a.list-group-item.active,
 a.list-group-item.active:focus,
 a.list-group-item.active:hover {
-    background: #348fe2
+    background: #69f
 }
 
 .nav-pills>.active>a>.badge,
@@ -3437,7 +3438,7 @@ a.text-inverse:hover {
 }
 
 .text-success {
-    color: #00acac!important
+    color: #69f!important
 }
 
 a.text-success:focus,
@@ -3455,7 +3456,7 @@ a.text-info:hover {
 }
 
 .text-primary {
-    color: #348fe2!important
+    color: #69f!important
 }
 
 a.text-primary:focus,
@@ -3567,11 +3568,11 @@ a.text-white:hover {
 }
 
 .bg-green {
-    background: #00acac!important
+    background: #69f!important
 }
 
 .bg-green-darker {
-    background: #008a8a!important
+    background: #69f!important
 }
 
 .bg-green-lighter {
@@ -3579,7 +3580,7 @@ a.text-white:hover {
 }
 
 .bg-blue {
-    background: #348fe2!important
+    background: #69f!important
 }
 
 .bg-blue-darker {
@@ -3923,7 +3924,7 @@ a.text-white:hover {
 
 .dataTables_wrapper table.dataTable.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before,
 .dataTables_wrapper table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before {
-    background: #00acac
+    background: #69f
 }
 
 body div.dataTables_wrapper div.dataTables_paginate ul.pagination {
@@ -4034,7 +4035,7 @@ table.dataTable th.focus {
 .open .dropdown-toggle.datepicker table tr td.active.disabled,
 .open .dropdown-toggle.datepicker table tr td.active.disabled:hover,
 .open .dropdown-toggle.datepicker table tr td.active:hover {
-    background: #348fe2!important;
+    background: #69f!important;
     color: #fff!important
 }
 
@@ -4102,7 +4103,7 @@ table.dataTable th.focus {
 
 .bootstrap-timepicker-widget table td a:focus,
 .bootstrap-timepicker-widget table td a:hover {
-    background: #348fe2!important;
+    background: #69f!important;
     border: none!important;
     color: #fff
 }
@@ -4125,7 +4126,7 @@ table.dataTable th.focus {
 .ui-widget-header .ui-stats-focus,
 .ui-widget-header .ui-stats-hover {
     border: none!important;
-    background: #348fe2!important;
+    background: #69f!important;
     color: #fff!important;
     margin: 0!important;
     -webkit-border-radius: 0!important;
@@ -4256,7 +4257,7 @@ ul.tagit.white li.tagit-choice-editable {
 }
 
 ul.tagit.primary li.tagit-choice-editable {
-    background: #348fe2!important
+    background: #69f!important
 }
 
 ul.tagit.info li.tagit-choice-editable {
@@ -4264,7 +4265,7 @@ ul.tagit.info li.tagit-choice-editable {
 }
 
 ul.tagit.success li.tagit-choice-editable {
-    background: #00acac!important
+    background: #69f!important
 }
 
 ul.tagit.warning li.tagit-choice-editable {
@@ -4340,7 +4341,7 @@ ul.tagit.inverse li.tagit-choice .tagit-close:hover .ui-icon-close:before {
 
 .parsley-success {
     background: #cee!important;
-    border-color: #00acac!important
+    border-color: #69f!important
 }
 
 .parsley-error:focus,
@@ -4428,7 +4429,7 @@ ul.tagit.inverse li.tagit-choice .tagit-close:hover .ui-icon-close:before {
 .bwizard-steps li.active,
 .bwizard-steps li.active:focus,
 .bwizard-steps li.active:hover {
-    background: #00acac!important
+    background: #69f!important
 }
 
 .bwizard-steps li.active .label {
@@ -4910,7 +4911,7 @@ body .fc button:active {
 .todolist>li.active>a:focus .todolist-input i:before,
 .todolist>li.active>a:hover .todolist-input i:before {
     content: '\f14a';
-    color: #00acac;
+    color: #69f;
     opacity: 1;
     filter: alpha(opacity=100)
 }
@@ -5456,7 +5457,7 @@ body .fc button:active {
 
 .timeline .timeline-icon a:focus,
 .timeline .timeline-icon a:hover {
-    background: #00acac
+    background: #69f
 }
 
 .timeline .timeline-body {
@@ -5504,7 +5505,7 @@ body .fc button:active {
 
 .timeline-header .username,
 .timeline-header .username a {
-    color: #00acac
+    color: #69f
 }
 
 .timeline img {
@@ -5647,7 +5648,7 @@ body .fc button:active {
 }
 
 .coming-soon a {
-    color: #00acac
+    color: #69f
 }
 
 .coming-soon .coming-soon-content {
@@ -5816,7 +5817,7 @@ body .fc button:active {
 }
 
 .range-quantity {
-    background: #00acac!important
+    background: #69f!important
 }
 
 .red .range-quantity {
@@ -5824,7 +5825,7 @@ body .fc button:active {
 }
 
 .blue .range-quantity {
-    background: #348fe2!important
+    background: #69f!important
 }
 
 .purple .range-quantity {
@@ -5841,7 +5842,7 @@ body .fc button:active {
 
 .datetimepicker table tr span.active,
 .datetimepicker table tr td.active {
-    background: #348fe2!important;
+    background: #69f!important;
     color: #fff!important
 }
 
@@ -6553,7 +6554,7 @@ body .fc button:active {
 }
 
 .list-email>li.list-group-item.success:before {
-    background: #00acac
+    background: #69f
 }
 
 .list-email>li.list-group-item.info:before {
@@ -6565,7 +6566,7 @@ body .fc button:active {
 }
 
 .list-email>li.list-group-item.primary:before {
-    background-color: #348fe2
+    background-color: #69f
 }
 
 .list-email>li.list-group-item.inverse:before {
@@ -6936,7 +6937,7 @@ body.flat-black {
 .flat-black .bwizard-steps li.active,
 .flat-black .bwizard-steps li.active:focus,
 .flat-black .bwizard-steps li.active:hover {
-    background: #00acac!important
+    background: #69f!important
 }
 
 .flat-black .bwizard-steps li:focus,
@@ -7002,7 +7003,7 @@ body.flat-black {
 
 .pace-progress {
     text-align: center;
-    background: #00acac;
+    background: #69f;
     -webkit-transition: width 1s;
     -moz-transition: width 1s;
     -o-transition: width 1s;
@@ -7024,8 +7025,8 @@ body.flat-black {
     width: 14px;
     height: 14px;
     border: 2px solid transparent;
-    border-top-color: #00acac;
-    border-left-color: #00acac;
+    border-top-color: #69f;
+    border-left-color: #69f;
     border-radius: 10px;
     -webkit-animation: pace-spinner .4s linear infinite;
     -moz-animation: pace-spinner .4s linear infinite;
@@ -7547,7 +7548,7 @@ body.flat-black {
 
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
-    background: #348fe2!important;
+    background: #69f!important;
     text-shadow: none!important;
     color: #fff
 }
@@ -7559,7 +7560,7 @@ body.flat-black {
 
 .daterangepicker .ranges li.active,
 .daterangepicker .ranges li:hover {
-    background: #348fe2!important;
+    background: #69f!important;
     color: #fff!important
 }
 
@@ -7581,7 +7582,7 @@ body.flat-black {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background: #348fe2!important
+    background: #69f!important
 }
 
 .select2-container .select2-selection--single,
@@ -7993,7 +7994,7 @@ body .bootstrap-datetimepicker-widget table td {
 .top-menu .nav>li.active>a,
 .top-menu .nav>li.active>a:focus,
 .top-menu .nav>li.active>a:hover {
-    background: #00acac;
+    background: #69f;
     color: #fff
 }
 
@@ -8282,13 +8283,13 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .checkbox.checkbox-css input:checked+label:before {
-    background: #348fe2;
-    border-color: #348fe2
+    background: #69f;
+    border-color: #69f
 }
 
 .checkbox.checkbox-css.checkbox-success input:checked+label:before {
-    background: #00acac;
-    border-color: #00acac
+    background: #69f;
+    border-color: #69f
 }
 
 .checkbox.checkbox-css.checkbox-info input:checked+label:before {
@@ -8338,13 +8339,13 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .radio.radio-css input:checked+label:before {
-    background: #348fe2;
-    border-color: #348fe2
+    background: #69f;
+    border-color: #69f
 }
 
 .radio.radio-css.radio-success input:checked+label:before {
-    background: #00acac;
-    border-color: #00acac
+    background: #69f;
+    border-color: #69f
 }
 
 .radio.radio-css.radio-info input:checked+label:before {
@@ -8373,11 +8374,11 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .sweet-alert .sa-icon.sa-success {
-    border-color: #00acac!important
+    border-color: #69f!important
 }
 
 .sweet-alert .btn-success:focus {
-    border-color: #008a8a!important
+    border-color: #69f!important
 }
 
 .sweet-alert .sa-icon.sa-success .sa-placeholder {
@@ -8385,7 +8386,7 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .sweet-alert .sa-icon.sa-success .sa-line {
-    background-color: #00acac!important
+    background-color: #69f!important
 }
 
 .sweet-alert .sa-icon.sa-info {
@@ -8504,8 +8505,8 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .card-primary {
-    background-color: #348fe2;
-    border-color: #348fe2
+    background-color: #69f;
+    border-color: #69f
 }
 
 .card-primary .card-footer,
@@ -8514,8 +8515,8 @@ body .bootstrap-datetimepicker-widget table td {
 }
 
 .card-success {
-    background-color: #00acac;
-    border-color: #00acac
+    background-color: #69f;
+    border-color: #69f
 }
 
 .card-success .card-footer,
