@@ -1,4 +1,5 @@
 @extends('front.layouts.admaster')
+@section('pageTitle', 'BitCoin Transactions - Sent')
 @section('content')
 
         <div class="row">
