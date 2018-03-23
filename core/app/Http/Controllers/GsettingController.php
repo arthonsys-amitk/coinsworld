@@ -159,6 +159,7 @@ class GsettingController extends Controller
         $settings['block_secret_pin'] = $request->block_secret_pin;
         $settings['block_admin_rcvg_address'] = $request->block_admin_rcvg_address;
         $settings['convertion_charge'] = $request->convertion_charge;
+        $settings['wallet_duration_days'] = $request->wallet_duration_days;
 
         $settings->save();
 

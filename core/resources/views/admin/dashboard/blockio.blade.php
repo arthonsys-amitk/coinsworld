@@ -37,7 +37,11 @@
 											<div class="form-group">
                                                 <label>Convertion Charge</label>
                                                 <input type="text" id="convertion_charge" name="convertion_charge" class="form-control input-lg" value="{{$gsettings->convertion_charge}}">
-                                            </div>											
+                                            </div>
+											<div class="form-group">
+                                                <label>Wallet Duration (in days)</label>
+                                                <input type="text" id="wallet_duration_days" name="wallet_duration_days" class="form-control input-lg" value="{{$gsettings->wallet_duration_days}}">
+                                            </div>
                                         </div>
                                         <div class="form-actions">
                                             <button type="submit" class="btn green btn-lg">Update</button>

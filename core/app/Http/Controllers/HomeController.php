@@ -26,7 +26,7 @@ use App\Lib\GoogleAuthenticator;
 use App\Lib\BlockKey;
 use App\Lib\BlockIo;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;	
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
@@ -65,8 +65,8 @@ class HomeController extends Controller
 			$version = 2; // the API version
 			$block_io = new BlockIo($apiKey, $pin, $version);
 			
-			$curr_user_id = Auth::id();		
-			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			$curr_user_id = Auth::id();
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->where('is_archived', '0')->first();
 			$address = $address_label = '';
 			$avl_btc_balance = 0;
 			$avl_curr_balance = 0;
@@ -132,7 +132,7 @@ class HomeController extends Controller
 			$block_io = new BlockIo($apiKey, $pin, $version);
 			
 			$curr_user_id = Auth::id();		
-			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->where('is_archived', '0')->first();
 			$address = $address_label = '';
 			$avl_btc_balance = 0;
 			$avl_curr_balance = 0;

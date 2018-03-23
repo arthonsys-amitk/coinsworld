@@ -26,7 +26,7 @@ class UaccountController extends Controller
 		$gset = Gsetting::first();
 		$curr_user_id = Auth::id();
 		
-		$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+		$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->where('is_archived', '0')->first();
 		$address = $address_label = '';
 		if($user_rec) {
 			$address = $user_rec->address;
@@ -89,7 +89,7 @@ class UaccountController extends Controller
 		
 		try {
 			$curr_user_id = Auth::id();		
-			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->first();
+			$user_rec = DB::table('useraddresses')->where('user_id', $curr_user_id)->where('is_archived', '0')->first();
 			if(!is_null($user_rec)) {
 				$sender_address = $user_rec->address;
 				$sender_address_label = $user_rec->address_label;
