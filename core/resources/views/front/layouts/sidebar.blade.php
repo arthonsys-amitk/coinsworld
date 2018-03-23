@@ -59,11 +59,11 @@
 			<!--
             <li ><a href="{{route('go2fa')}}"><i class="fa fa-shield" aria-hidden="true"></i> <span>Security</span></a></li>
         
+			-->
             @if(Auth::user()->docv != '1')
             <li ><a href="{{route('document')}}"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Verify Document</span></a></li>
             @endif
-
-			-->
+			
             <li>
               <a href="{{ route('logout') }}"
               onclick="event.preventDefault();

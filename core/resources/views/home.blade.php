@@ -242,7 +242,16 @@ var newDate = new Date('{{$pri->created_at}}');
             </textarea>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary btn-lg btn-block">
+			<?php if(!$docverified):
+					$disabled = "disabled"; ?>
+					<div class="divdisabled" style="color: #ff0000; margin: 10px 0px;">Please verify document first before making any transaction</div>
+			<?php	
+				  else:
+					$disabled = "";
+				  endif;
+			?>
+			
+            <button class="btn btn-primary btn-lg btn-block" <?php echo $disabled; ?> >
               Send Money
             </button>
           </div>
@@ -266,7 +275,13 @@ var newDate = new Date('{{$pri->created_at}}');
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Request</h4>
       </div>
-      <div class="modal-body text-center">
+      
+	  <?php if(!$docverified): ?>
+		<div class="modal-body text-center">
+			<div class="divdisabled" style="color: #ff0000; margin: 10px 0px;">Please verify document first before making any transaction</div>
+		</div>
+	  <?php else: ?>
+	  <div class="modal-body text-center">
         <p>Copy and share this code to Request Money</p>
         <p id="qrcode" style="color:#3366cc; font-size: 20px;"></p>
         <div class="form-group">
@@ -274,11 +289,10 @@ var newDate = new Date('{{$pri->created_at}}');
           <input id="code" class="form-control input-lg">
           <span class="btn btn-success input-group-addon" id="copybtn">Copy</span>
         </div>
-        </div>
-
-        
-        
+        </div>        
       </div>
+	  <?php endif; ?>
+	  
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>

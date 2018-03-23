@@ -10,6 +10,7 @@
                     <i class="icon-settings font-dark"></i>
                     <span class="caption-subject bold uppercase">Document Verification Requests</span>
                 </div>
+				<!--
                  <div class="actions">
                       <form method="POST" action="{{route('tran.limit')}}" class="form-inline">
                         {{csrf_field()}}
@@ -27,6 +28,7 @@
                         </div>
                       </form>
                   </div>
+				  -->
 
             </div>
             <div class="portlet-body">
@@ -64,7 +66,7 @@
                              {{$doc->name}}
                         </td>
                          <td>
-                             {{$doc->created_at}}
+                             {{convert_to_timezone( $doc->created_at, 'Asia/Calcutta')}}
                         </td>
                   
                         <td>

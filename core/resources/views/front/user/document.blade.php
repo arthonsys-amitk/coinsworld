@@ -15,14 +15,13 @@
 		</div>
 		<div class="form-group">
 			<label>Document Photo</label>
-            <input type="file" name="photo" class="form-control input-lg"> 
+            <input type="file" name="photo" class="form-control input-lg" style="padding: 0px;"> 
            <span style="color: #ff6600;">Standard Image Size: 400 x 300 px</span>
         </div>
 		
 		<div class="form-group">
 			<label for="details">Account Details</label>
-			<textarea class="form-control"  id="details" name="details" rows="5">					
-			</textarea>
+			<textarea class="form-control"  id="details" name="details" rows="5"></textarea>
 		</div>
 		<div class="form-group">
 			<button type="submit" class="btn btn-block btn-lg btn-primary">Send Verify Request</button>

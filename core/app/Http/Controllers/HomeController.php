@@ -57,6 +57,8 @@ class HomeController extends Controller
         $nusd = Auth::user()->balance * $price->price;
         $totusd = $btusd + $nusd;
 
+		$docverified = Auth::user()->docv;
+		
         $allprice = Price::orderBy('id', 'ASC')->get();
 
         $gsettings = Gsetting::find(1);
@@ -91,7 +93,7 @@ class HomeController extends Controller
 			
 		}
 		
-		return view('home',compact('currentRate','price','totusd','btusd','nusd','allprice', 'avl_btc_balance', 'avl_curr_balance'));
+		return view('home',compact('currentRate','price','totusd','btusd','nusd','allprice', 'avl_btc_balance', 'avl_curr_balance', 'docverified'));
     }
 
     public function convert()

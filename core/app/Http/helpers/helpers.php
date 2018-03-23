@@ -51,3 +51,15 @@ if (! function_exists('send_sms'))
 
     }
 }
+
+if (! function_exists('convert_to_timezone')) 
+{    
+    function convert_to_timezone( $datetime, $new_timezone )
+    {
+        $oldtmz = date_default_timezone_get();
+		$date = new DateTime($datetime, new DateTimeZone($oldtmz));
+		$date->setTimezone(new DateTimeZone($new_timezone));
+		$local_time = $date->format('Y-m-d H:i:s');
+		return $local_time;
+    }
+}
