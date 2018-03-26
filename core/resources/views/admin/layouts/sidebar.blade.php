@@ -12,7 +12,7 @@
     
         <li class="nav-item  @if(request()->path() == 'admin/home') active open @endif">
             <a href="{{url('admin/home')}}" class="nav-link nav-toggle">
-                <i class="icon-home"></i>
+                <i class="fa fa-dashboard"></i>
                 <span class="title">Dashboard</span>
                 <span class="selected"></span>
             </a>
@@ -27,7 +27,7 @@
             @endif">
             <a href="#" class="nav-link nav-toggle">
                 <i class="fa fa-users"></i>
-                <span class="title">User Management</span>
+                <span class="title">Manage Users</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
@@ -41,24 +41,24 @@
                 <li class="nav-item @if(request()->path() == 'admin/manage/userlog') active open @endif">
                     <a href="{{route('withdraw.userlog')}}" class="nav-link ">
                         <i class="fa fa-money"></i>
-                        <span class="title">Users Transaction Log</span>
+                        <span class="title">Users Transaction List</span>
                     </a>
                 </li>
                  <li class="nav-item @if(request()->path() == 'admin/broadcast') active open @endif">
                     <a href="{{route('broadcast')}}" class="nav-link ">
-                        <i class="icon-envelope"></i>
+                        <i class="icon-envelope-open"></i>
                         <span class="title">Broadcast Email</span>
                     </a>
                 </li> 
                 <li class="nav-item @if(request()->path() == 'admin/document') active open @endif">
                     <a href="{{route('document.requests')}}" class="nav-link ">
-                        <i class="icon-docs"></i>
+                        <i class="fa fa-book"></i>
                         <span class="title">Documents</span>
                     </a>
                 </li> 
                 <li class="nav-item @if(request()->path() == 'admin/banned/users') active open @endif">
                     <a href="{{route('new.users')}}" class="nav-link ">
-                        <i class="fa fa-times"></i>
+                        <i class="fa fa-user-times"></i>
                         <span class="title">Banned Users</span>
                     </a>
                 </li> 
@@ -163,7 +163,7 @@
                 </li>
                  <li class="nav-item @if(request()->path() == 'admin/gsettings/sms') active open @endif">
                     <a href="{{url('admin/gsettings/sms')}}" class="nav-link ">
-                        <i class="fa fa-envelope-o"></i>
+                        <i class="fa fa-envelope"></i>
                         <span class="title">SMS Settings</span>
                     </a>
                 </li>

@@ -83,7 +83,7 @@
           {{ csrf_field() }}
           {{method_field('put')}}
           <div class="form-group col-md-4">
-                <label>Fast Name</label>
+                <label>First Name</label>
                 <input type="text" name="firstname" class="form-control input-sz" value="{{$user->firstname}}">
             </div>
             <div class="form-group col-md-4">

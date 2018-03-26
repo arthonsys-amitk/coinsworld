@@ -27,7 +27,7 @@ Website: http://www.seantheme.com/color-admin-v3.0/admin/html/
 }
 .text-theme,
 .sidebar .sub-menu > li.active > a:before {
-    color: #00acac;
+    color: #ffffff;
 }
 @media (max-width: 767px) {
     .navbar-inverse .navbar-header {
@@ -62,22 +62,22 @@ Website: http://www.seantheme.com/color-admin-v3.0/admin/html/
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00d2d2', endColorstr='#00acac',GradientType=0 ); /* IE6-8 */
 }
 .pace-progress {
-    background: #00acac;
+    background: #6699ff;
 }
 .pace .pace-activity {
-    border-top-color: #00acac;
-    border-left-color: #00acac;
+    border-top-color: #6699ff;
+    border-left-color: #6699ff;
 }
 
 
 /* Added in v1.7 */
 
 .page-with-light-sidebar .sidebar .nav > li.active > a > i {
-    color: #00acac;
+    color: #6699ff;
 }
 .page-with-light-sidebar .sidebar .nav > li.active > a .badge,
 .page-with-light-sidebar .sidebar .nav > li.active > a .label.label-theme {
-    background: #00acac;
+    background: #6699ff;
 }
 
 

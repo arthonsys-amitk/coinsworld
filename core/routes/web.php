@@ -13,6 +13,7 @@
 
 Auth::routes();
 
+Route::get('/login', 'Auth\LoginController@redirectLogin')->name('redirectLogin');
 Route::post('/login', 'Auth\LoginController@postLogin')->name('postLogin');
 Route::post('/ajaxLogin', 'Auth\LoginController@ajaxLogin')->name('ajax.login');
 

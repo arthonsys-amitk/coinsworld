@@ -77,6 +77,9 @@
                             </form>
                             <div class="clearfix"></div>
                         </div>
+						<div class="frm_rel_txt">
+                            <h6>Not a member? <a id="signup-linked" href="javascript:;">Sign up now</a></h6>
+                        </div>
                     </div>
                 </div>
 
@@ -89,7 +92,7 @@
             <div class="modal-dialog modal-md">
 
                 <!-- Modal content-->
-                <div class="modal-content signin_pop">
+                <div class="modal-content signin_pop" style="padding-top: 5px;">
                     <div class="modal-body">
                         <img src="{{ asset('assets/images/logo/logo.png') }}"/>
                         <h1>Sign up now</h1>
@@ -424,6 +427,9 @@
                             </form>
                             <div class="clearfix"></div>
                         </div>
+						<div class="frm_rel_txt">
+                            <h6>Already have an account? <a id="signin-linked" href="javascript:;">Sign in now</a></h6>
+                        </div>
                     </div>
                 </div>
 
@@ -484,12 +490,14 @@
 			jQuery(document).ready(function () {
 				jQuery("#btnSignin").click(function(e) {
 					e.preventDefault();
+					jQuery(this).css('opacity',0.3);
 					token = jQuery('input[name="_token"]').val();
 					jQuery.ajax({
 						type: "POST",
 						url: jQuery("#hdajaxurl").val(),
 						data: {username: jQuery("#username").val(), password: jQuery("#password").val(), '_token': '{!! csrf_token() !!}'},
 						success: function(data) {
+							jQuery("#btnSignin").css('opacity',1);
 							if(data == 1) {
 								msg = "Login successful";
 								jQuery("#frmSignin").submit();
@@ -497,8 +505,21 @@
 								msg = "Incorrect Username or Password";
 								jQuery("#errSignin").html(msg);
 							}
+						},
+						error: function (jxhr, exception) {
+							jQuery("#btnSignin").css('opacity',1);
 						}
 					});
+				});
+				
+				jQuery("#signup-linked").click(function(){
+					jQuery("#signin").modal('hide');
+					jQuery("#signup").modal('show');
+				});
+				
+				jQuery("#signin-linked").click(function(){
+					jQuery("#signin").modal('show');
+					jQuery("#signup").modal('hide');
 				});
 			});	
 		</script>

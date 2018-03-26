@@ -22,12 +22,12 @@
         <!-- end sidebar user -->
         <!-- begin sidebar nav -->
         <ul class="nav">
-          <li {{{ (Request::is('home') ? 'class=active' : '') }}}><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li {{{ (Request::is('home') ? 'class=active' : '') }}}><a href="{{route('home')}}" title="Dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
           
           <li class="has-sub {{{ ((Request::is('home/bitlog') || Request::is('home/bitlogrcvd'))? 'active' : '') }}}">
-            <a href="javascript:;">
+            <a href="javascript:;" title="Transactions">
                 <b class="caret pull-right"></b>
-                <i class="fa fa-th"></i>
+                <i class="fa fa-th-list"></i>
                 <span>Transactions</span>
             </a>
             <ul class="sub-menu">
@@ -36,11 +36,11 @@
                 <a href="{{route('coinlog')}}"><img src="{{ asset('assets/images/logo/icon.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> {{$gset->curCode}}</a>
               </li>
 			  -->
-              <li {{{ (Request::is('home/bitlog') ? 'class=active' : '') }}}><a href="{{route('bitlog')}}">
-                    <img src="{{ asset('assets/images/coin/btc.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> Sent</a>
+              <li {{{ (Request::is('home/bitlog') ? 'class=active' : '') }}}><a href="{{route('bitlog')}}" title="Sent">
+                    <img src="{{ asset('assets/images/coin/b_icon.png') }}"  style="width:15%; "> Sent</a>
               </li> 
-			  <li {{{ (Request::is('home/bitlogrcvd') ? 'class=active' : '') }}}><a href="{{route('bitlogrcvd')}}">
-                    <img src="{{ asset('assets/images/coin/btc.png') }}"  style="width:15%; filter:invert(1) opacity(1);"> Received</a>
+			  <li {{{ (Request::is('home/bitlogrcvd') ? 'class=active' : '') }}}><a href="{{route('bitlogrcvd')}}" title="Received">
+                    <img src="{{ asset('assets/images/coin/b_icon.png') }}"  style="width:15%; "> Received</a>
               </li> 
             </ul>
           </li>
@@ -52,22 +52,22 @@
             <li><a href="{{route('convert')}}""><i class="fa fa-arrows" aria-hidden="true"></i> <span>Convert</span></a></li>
 			-->
             <li>
-            <li {{{ (Request::is('user/profile') ? 'class=active' : '') }}}><a href="{{route('user.profile')}}"><i class="fa fa-user" aria-hidden="true"></i> <span>Profile</span></a></li>
+            <li {{{ (Request::is('user/profile') ? 'class=active' : '') }}}><a href="{{route('user.profile')}}" title="Profile"><i class="fa fa-user" aria-hidden="true"></i> <span>Profile</span></a></li>
             <li {{{ (Request::is('change/password') ? 'class=active' : '') }}}>
-                <a href="{{route('changepass')}}"><i class="fa fa-lock" aria-hidden="true"></i> <span>Password</span></a>
+                <a href="{{route('changepass')}}" title="Change Password"><i class="fa fa-key" aria-hidden="true"></i> <span>Password</span></a>
             </li>
 			<!--
             <li ><a href="{{route('go2fa')}}"><i class="fa fa-shield" aria-hidden="true"></i> <span>Security</span></a></li>
         
 			-->
             @if(Auth::user()->docv != '1')
-            <li ><a href="{{route('document')}}"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Verify Document</span></a></li>
+            <li ><a href="{{route('document')}}" title="Verify Document"><i class="fa fa-id-card" aria-hidden="true"></i> <span>Verify Document</span></a></li>
             @endif
 			
             <li>
               <a href="{{ route('logout') }}"
               onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i>
+              document.getElementById('logout-form').submit();" title="Sign Out"><i class="fa fa-sign-out" aria-hidden="true"></i>
               <span>SIGN OUT</span>
           </a>
 
@@ -77,7 +77,7 @@
           </li>
                  
               <!-- begin sidebar minify button -->
-          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+          <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify" title="Minify/Expand"><i class="fa fa-angle-double-left"></i></a></li>
               <!-- end sidebar minify button -->
         </ul>
         <!-- end sidebar nav -->

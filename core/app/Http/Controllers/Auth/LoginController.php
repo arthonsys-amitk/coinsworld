@@ -19,6 +19,9 @@ use Carbon\Carbon;
 class LoginController extends Controller
 {
 
+	public function redirectLogin() {
+		return redirect()->to('/');
+	}
 	
 	public function ajaxLogin(Request $request)
     {

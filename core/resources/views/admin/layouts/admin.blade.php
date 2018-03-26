@@ -39,12 +39,7 @@
                 <img src="{{ asset('assets/images/logo/logo.png') }}" width="200px" /> 
         </div>
         <!-- END LOGO -->
-        <!-- BEGIN LOGIN -->
-        <div class="content">
-
-@yield('content')
-            
-        </div>
+        
         <!--[if lt IE 9]>
 <script src="{{ asset('assets/admin/global/plugins/respond.min.js') }}"></script>
 <script src="{{ asset('assets/admin/global/plugins/excanvas.min.js') }}"></script> 
@@ -72,6 +67,13 @@
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <!-- END THEME LAYOUT SCRIPTS -->
+		
+		<!-- BEGIN LOGIN -->
+        <div class="content">
+
+@yield('content')
+            
+        </div>
     </body>
 
 </html>

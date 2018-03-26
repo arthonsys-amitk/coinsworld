@@ -569,7 +569,7 @@ label {
 }
 
 .sidebar .sub-menu>li>a:before {
-    content: '\f10c';
+    content: '\f192';
     font-family: FontAwesome;
     position: absolute;
     left: 0;

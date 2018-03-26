@@ -20,11 +20,11 @@
                             <ul class="dropdown-menu dropdown-menu-default">
                                 <li>
                                     <a href="{{url('admin/register')}}">
-                                        <i class="icon-user"></i>Register New Admin </a>
+                                        <i class="fa fa-user"></i>Register New Admin </a>
                                 </li>
                                 <li>
                                     <a href="{{route('admin.changepass')}}">
-                                        <i class="icon-lock"></i>Change Password</a>
+                                        <i class="icon-key"></i>Change Password</a>
                                 </li>
 
                                 <li class="divider"> </li>
@@ -33,7 +33,7 @@
                                     <a href="{{ url('/admin/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        Logout
+                                        <i class="fa fa-sign-out"></i>Logout
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
