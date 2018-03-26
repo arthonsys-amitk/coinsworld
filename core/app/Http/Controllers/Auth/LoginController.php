@@ -19,8 +19,40 @@ use Carbon\Carbon;
 class LoginController extends Controller
 {
 
+	
+	public function ajaxLogin(Request $request)
+    {
+		if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password,
+                    ]))
+         {
 
-     public function postLogin(Request $request)
+            $logg = User::findOrFail(Auth::user()->id);
+
+            if(Auth::user()->gtfa==1){
+                $logg['tfav'] = 0;
+            }else{
+                $logg['tfav'] = 1;
+
+            }
+            $logg->save();
+			
+			$this->checkWalletExpiry();
+			
+            //return redirect('/home');
+			echo "1";
+			exit(0);
+
+        }
+
+        //$request->session()->flash('alert', 'Login  incorrect!');
+        //return redirect()->back();
+		echo "0";
+		exit(0);
+    }
+
+    public function postLogin(Request $request)
     {
 
         if (Auth::attempt([
@@ -48,8 +80,37 @@ class LoginController extends Controller
         $request->session()->flash('alert', 'Login  incorrect!');
         return redirect()->back();
     }
+    
+	public function postLoginOld(Request $request)
+    {
 
-    use AuthenticatesUsers;
+        if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password,
+                    ]))
+         {
+
+            $logg = User::findOrFail(Auth::user()->id);
+
+            if(Auth::user()->gtfa==1){
+                $logg['tfav'] = 0;
+            }else{
+                $logg['tfav'] = 1;
+
+            }
+            $logg->save();
+			
+			$this->checkWalletExpiry();
+			
+            return redirect('/home');
+
+        }
+
+        $request->session()->flash('alert', 'Login  incorrect!');
+        return redirect()->back();
+    }
+	
+	use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.

@@ -46,7 +46,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $all = file_get_contents("https://blockchain.info/ticker");
+		$all = file_get_contents("https://blockchain.info/ticker");
         $res = json_decode($all);
         
 		$currentRate = $res->USD->last;

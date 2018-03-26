@@ -14,6 +14,8 @@
 Auth::routes();
 
 Route::post('/login', 'Auth\LoginController@postLogin')->name('postLogin');
+Route::post('/ajaxLogin', 'Auth\LoginController@ajaxLogin')->name('ajax.login');
+
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/refer/{reference}', 'FrontController@register');

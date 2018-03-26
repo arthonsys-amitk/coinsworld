@@ -54,21 +54,24 @@
                         <img src="{{ asset('assets/images/logo/logo.png') }}"/>
                         <h1>Sign in here</h1>
                         <div class="col-md-6 col-sm-6 m_auto">
-                            <form class="req_call_frm" method="post" action="{{ route('postLogin') }}">
+							<input type="hidden" id="hdajaxurl" name="hdajaxurl" value="{{ route('ajax.login') }}" />
+							
+                            <form id="frmSignin" class="req_call_frm" method="post" action="{{ route('postLogin') }}">
                                 {{ csrf_field() }}
                                 <div class="req_call_wrp">
-                                    <input class="col-xs-12" name="username" placeholder="Username" type="text">
+                                    <input class="col-xs-12" id="username" name="username" placeholder="Username" type="text">
                                     <div class="clearfix"></div>
                                     <div class="clearfix"></div>
                                 </div>
 
                                 <div class="req_call_wrp">
-                                    <input class="col-xs-12" name="password" placeholder="Password" type="password">
+                                    <input class="col-xs-12" id="password" name="password" placeholder="Password" type="password">
                                     <div class="clearfix"></div>
                                 </div>
 
                                 <div class="req_call_wrp">
-                                    <input value="Sign In" type="submit">
+                                    <input value="Sign In" type="submit" id="btnSignin" name="btnSignin">
+									<div id="errSignin" class="divdisabled" style="color: #ff0000; margin: 10px 0px;"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </form>
@@ -477,25 +480,34 @@
                 jQuery('#demo1').skdslider({'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': false, 'showPlayButton': false, 'autoSlide': true, 'animationType': 'fading'});
             });
         </script>
-
+		<script type="text/javascript">
+			jQuery(document).ready(function () {
+				jQuery("#btnSignin").click(function(e) {
+					e.preventDefault();
+					token = jQuery('input[name="_token"]').val();
+					jQuery.ajax({
+						type: "POST",
+						url: jQuery("#hdajaxurl").val(),
+						data: {username: jQuery("#username").val(), password: jQuery("#password").val(), '_token': '{!! csrf_token() !!}'},
+						success: function(data) {
+							if(data == 1) {
+								msg = "Login successful";
+								jQuery("#frmSignin").submit();
+							} else {
+								msg = "Incorrect Username or Password";
+								jQuery("#errSignin").html(msg);
+							}
+						}
+					});
+				});
+			});	
+		</script>
+		@if($errors->any())
+			<script type="text/javascript">
+			jQuery(document).ready(function () {
+				jQuery("#signup").modal('show');
+			});
+			</script>
+		@endif
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

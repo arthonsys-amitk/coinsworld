@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         '/home/ipnpaypal',
         '/home/ipnperfect',
         '/home/ipnstripe',
-        '/home/ipnbtc'
+        '/home/ipnbtc',
+		'/login'
     ];
 }

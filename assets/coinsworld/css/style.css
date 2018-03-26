@@ -1526,3 +1526,7 @@ p.copyrht{
 	background:#6396fc;
 	border-color: #6396fc;
 }
+.help-block strong {
+    color: #ff0000;
+    font-weight: normal;
+}
