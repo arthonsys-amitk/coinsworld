@@ -63,9 +63,11 @@
                       <div class="col-md-6">
               <a href="{{route('email',$user->id)}}" class="btn btn-lg btn-block btn-primary" style="margin-bottom:10px;">Send Email</a>
           </div>
+		  <!--
           <div class="col-md-6"> 
             <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#mbalance">Manage Balance</button>        
           </div>
+		  -->
           </div>            
 
         </div>

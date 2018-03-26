@@ -161,12 +161,14 @@
                         <span class="title">Email Settings</span>
                     </a>
                 </li>
+				<!--
                  <li class="nav-item @if(request()->path() == 'admin/gsettings/sms') active open @endif">
                     <a href="{{url('admin/gsettings/sms')}}" class="nav-link ">
                         <i class="fa fa-envelope"></i>
                         <span class="title">SMS Settings</span>
                     </a>
                 </li>
+				-->
             </ul>
         </li>
         <li class="nav-item
