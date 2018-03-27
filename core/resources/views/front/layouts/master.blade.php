@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Coinsworld</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="_token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/coinsworld/css/media_query.css') }}">
@@ -492,10 +493,16 @@
 					e.preventDefault();
 					jQuery(this).css('opacity',0.3);
 					token = jQuery('input[name="_token"]').val();
+					jQuery.ajaxSetup({
+						headers: {
+						  'X-CSRF-Token': jQuery('meta[name="_token"]').attr('content')
+						}
+					});
+					
 					jQuery.ajax({
 						type: "POST",
 						url: jQuery("#hdajaxurl").val(),
-						data: {username: jQuery("#username").val(), password: jQuery("#password").val(), '_token': '{!! csrf_token() !!}'},
+						data: {username: jQuery("#username").val(), password: jQuery("#password").val(), '_token': jQuery('meta[name="_token"]').attr('content')},
 						success: function(data) {
 							jQuery("#btnSignin").css('opacity',1);
 							if(data == 1) {
@@ -507,6 +514,7 @@
 							}
 						},
 						error: function (jxhr, exception) {
+							alert("Error occurred");
 							jQuery("#btnSignin").css('opacity',1);
 						}
 					});
