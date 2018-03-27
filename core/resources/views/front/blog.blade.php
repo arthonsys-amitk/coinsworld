@@ -325,13 +325,13 @@
                 </div>
 
                 <div class="recent_pst_wrp">
-                    <img src="{{ asset('assets/coinsworld/images/p_post4.jpg') }}"/>
+                    <img src="{{ asset('assets/coinsworld/images/r_post4.jpg') }}"/>
                     <p>These 5 Experts Share Their Predictions For Chatbots In 2018</p>
                     <div class="clearfix"></div>
                 </div>
 
                 <div class="recent_pst_wrp">
-                    <img src="{{ asset('assets/coinsworld/images/p_post5.jpg') }}"/>
+                    <img src="{{ asset('assets/coinsworld/images/r_post5.jpg') }}"/>
                     <p>Innogy New Ventures invests in Agent.ai</p>
                     <div class="clearfix"></div>
                 </div>

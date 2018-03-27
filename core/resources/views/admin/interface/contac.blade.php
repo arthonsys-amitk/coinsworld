@@ -7,7 +7,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-list font-blue"></i>
-                        <span class="caption-subject font-green bold uppercase">Contac Information</span>
+                        <span class="caption-subject font-green bold uppercase">Contact Information</span>
                     </div>
                 </div>
                 <div class="portlet-body">

@@ -45,9 +45,9 @@
             </ul>
           </li>
 
-			<!--
+			
              <li><a href="{{route('deposit')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> <span>Buy {{$gset->curCode}}</span></a></li>
-              <li><a href="{{route('sell.coin')}}"><i class="fa fa-money" aria-hidden="true"></i> <span>Sell {{$gset->curCode}}</span></a></li>
+             <!-- <li><a href="{{route('sell.coin')}}"><i class="fa fa-money" aria-hidden="true"></i> <span>Sell {{$gset->curCode}}</span></a></li>
 			
             <li><a href="{{route('convert')}}""><i class="fa fa-arrows" aria-hidden="true"></i> <span>Convert</span></a></li>
 			-->

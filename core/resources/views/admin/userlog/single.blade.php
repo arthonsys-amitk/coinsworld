@@ -13,7 +13,7 @@
           <h5>Username: <b>{{ $user->username }}</b></h5>
         </div>
       </div>
-                    <div class="col-md-3">
+      <div class="col-md-3" style="float:right">
         <div class="dashboard-stat green">
         <div class="visual">
           <i class="fa fa-bitcoin"></i>
@@ -24,7 +24,8 @@
             <div class="desc">BitCoin Balance</div>
           </div>
         </div>
-      </div>   
+      </div>
+	  <!--
       <div class="col-md-3">
        <div class="dashboard-stat purple">
         <div class="visual">
@@ -49,6 +50,7 @@
           </div>
         </div>
       </div>
+	  -->
     </div>
     <div class="portlet-body">
       <div class="row">
@@ -113,7 +115,7 @@
             <input class="form-control" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-width="100%" data-on="Active" data-off="Deactive" type="checkbox" value="1" name="status" {{ $user->status == "1" ? 'checked' : '' }}> 
           </div> 
           <div class="form-group col-md-4">
-            <label>User Doccument Verification</label>
+            <label>User Document Verification Done</label>
             <input class="form-control" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-width="100%" data-on="Yes" data-off="No" type="checkbox" value="1" name="docv" {{ $user->docv == "1" ? 'checked' : '' }}> 
           </div>
           <div class="form-group col-md-4">

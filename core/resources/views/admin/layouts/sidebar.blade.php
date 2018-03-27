@@ -59,14 +59,15 @@
                 <li class="nav-item @if(request()->path() == 'admin/banned/users') active open @endif">
                     <a href="{{route('new.users')}}" class="nav-link ">
                         <i class="fa fa-user-times"></i>
-                        <span class="title">Banned Users</span>
+                        <span class="title">Unapproved Users</span>
                     </a>
                 </li> 
                
             </ul>
         </li>
 
-        <li class="nav-item
+        <!--
+		<li class="nav-item
             @if(request()->path() == 'admin/withdraw/requests') active open
               @elseif(request()->path() == 'admin/withdraw/lists') active open
               @elseif(request()->path() == 'admin/withdraw/refunded') active open
@@ -98,7 +99,7 @@
                 </li>
             </ul>
         </li>
-
+		-->
          
 
         <li class="nav-item
@@ -118,6 +119,7 @@
                         <span class="title">Deposit Method</span>
                     </a>
                 </li> 
+				<!--
                  <li class="nav-item @if(request()->path() == 'admin/deposits/requests') active open @endif">
                     <a href="{{route('deposits.requests')}}" class="nav-link ">
                         <i class="fa fa-indent"></i>
@@ -130,6 +132,7 @@
                         <span class="title">Deposit List</span>
                     </a>
                 </li>                   
+				-->
             </ul>
         </li>
         <li class="nav-item 
@@ -206,6 +209,7 @@
                         <span class="title">About Section</span>
                     </a>
                 </li>
+				<!--
                  <li class="nav-item @if(request()->path() == 'admin/service') active open @endif">
                     <a href="{{route('service')}}" class="nav-link ">
                         <i class="fa fa-picture-o"></i>
@@ -219,19 +223,21 @@
                         <span class="title">Timeline</span>
                     </a>
                 </li>
+				-->
                 <li class="nav-item @if(request()->path() == 'admin/contac') active open @endif">
                     <a href="{{route('contac')}}" class="nav-link ">
                         <i class="fa fa-id-card"></i>
                         <span class="title">Contact Information</span>
                     </a>
                 </li>
+				<!--
                 <li class="nav-item @if(request()->path() == 'admin/footer') active open @endif">
                     <a href="{{route('footer')}}" class="nav-link ">
                         <i class="fa fa-list"></i>
                         <span class="title">Footer Content</span>
                     </a>
                 </li>
-
+				-->
             </ul>
         </li>
         <li class="nav-item
@@ -245,6 +251,7 @@
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
+				<!--
                 <li class="nav-item @if(request()->path() == 'admin/charges') active open @endif">
                     <a href="{{url('admin/charges')}}" class="nav-link ">
                         <i class="fa fa-money"></i>
@@ -257,6 +264,7 @@
                         <span class="title">Price</span>
                     </a>
                 </li>
+				-->
                 <li class="nav-item @if(request()->path() == 'admin/policy') active open @endif">
                     <a href="{{url('admin/policy')}}" class="nav-link ">
                         <i class="icon-layers"></i>

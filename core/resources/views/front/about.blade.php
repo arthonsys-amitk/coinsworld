@@ -42,7 +42,7 @@
 
 <div class="wayfinding_wrp our_mission_sec">
     <div class="container">
-        <h1>Our Benifits</h1>                
+        <h1>Our Benefits</h1>                
         <div class="col-md-5 col-sm-6 m_auto">
             <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</h6>
         </div>

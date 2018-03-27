@@ -31,10 +31,11 @@
                                     <div class="number">
                                         <span data-counter="counterup" data-value="{{$totalusers}}">0</span>
                                     </div>
-                                    <div class="desc"> Total User </div>
+                                    <div class="desc"> Total Users </div>
                                 </div>
                             </div>
                         </div>
+						<!--
                          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="dashboard-stat red">
                                 <div class="visual">
@@ -49,6 +50,7 @@
                                 </div>
                             </div>
                         </div>
+						-->
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="dashboard-stat green">
                                 <div class="visual">
@@ -58,7 +60,7 @@
                                     <div class="number">
                                         <span data-counter="counterup" data-value="{{$withdrawreq}}">0</span>
                                     </div>
-                                    <div class="desc"> Withdraw Request </div>
+                                    <div class="desc">Withdrawal Transactions </div>
                                 </div>
                             </div>
                         </div>

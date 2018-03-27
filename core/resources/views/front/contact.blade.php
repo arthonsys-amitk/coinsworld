@@ -12,7 +12,8 @@
 
 <div class="map_info_sec">
     <div class="col-md-6 col-sm-7 no_pddng">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14737.048664610167!2d88.45385760198975!3d22.569295986904915!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1520586946069" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe  width="600"  height="450"  frameborder="0" style="border:0"  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDAIqNAM8J2VqvqvVFd1ol5qTi9FgpBL2w&q={{str_replace('<br>', '', $contact->location)}}" allowfullscreen>
+		</iframe>
     </div>
     <div class="col-md-6 col-sm-5 cntct_info">
         <h1>Contact Info.</h1>
@@ -20,15 +21,17 @@
             <ul>
                 <li>
                     <h5>Address</h5>
-                    <h6>International House, 24, Holborn Viaduct London EC1A 2BN, United Kingdom.</h6>
+                    <!--<h6>International House, 24, Holborn Viaduct London EC1A 2BN, United Kingdom.</h6>-->
+                    <h6>{!! $contact->location !!}</h6>
                 </li>
                 <li>
                     <h5>Email</h5>
-                    <h6>contact@cryptogo.com</h6>
+                    <!--<h6>contact@cryptogo.com</h6>-->
+                    <h6>{{$contact->email}}</h6>
                 </li>
                 <li>
                     <h5>Phone</h5>
-                    <h6>+44 (0) 203 950 0950</h6>
+                    <h6>{{$contact->mobile}}</h6>
                 </li>
             </ul>
         </div>
@@ -130,14 +133,14 @@
 
         <div class="col-md-4 col-sm-5 pdng_lft">
             <div class="call_us">
-                <h3>Call us: (333) 052 39876</h3>
+                <h3>Call us: {{$contact->mobile}}</h3>
             </div>
             <h4 class="or_txt">Or</h4>
             <div class="clearfix"></div>
         </div>
 
         <div class="col-md-2 col-sm-3 col-xs-8">
-            <div class="contact_btn"><a href="#">Contact us</a></div>
+            <div class="contact_btn"><a href="mailto:{{$contact->email}}">Contact us</a></div>
             <div class="clearfix"></div>
         </div>
     </div>

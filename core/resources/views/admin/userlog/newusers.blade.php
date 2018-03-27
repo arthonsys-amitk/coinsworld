@@ -8,7 +8,7 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="fa fa-user-times font-dark"></i>
-                    <span class="caption-subject bold uppercase">Banned User List</span>
+                    <span class="caption-subject bold uppercase">Unapproved User List</span>
                 </div>
 
             </div>

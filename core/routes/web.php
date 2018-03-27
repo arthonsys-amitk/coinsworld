@@ -176,8 +176,8 @@ Route::prefix('admin')->group(
     // Route::get('/price/{price}/delete', 'PriceController@destroy')->name('price.destroy');
 
     //Contact
-    Route::get('/contac', 'ContacController@show')->name('contac');
-    Route::put('/contac/{contac}', 'ContacController@update')->name('contac.update');
+    Route::get('/contact', 'ContacController@show')->name('contac');
+    Route::put('/contact/{contac}', 'ContacController@update')->name('contac.update');
 
     //Statistics
     Route::get('/statistics', 'StatisticController@show')->name('statistics');

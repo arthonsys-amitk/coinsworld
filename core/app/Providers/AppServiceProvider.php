@@ -77,7 +77,8 @@ class AppServiceProvider extends ServiceProvider
         // Withdraw Requests
         view()->composer('admin.home', function($view)
         {
-          $view->with('withdrawreq', \App\Withdraw::where('status', '0')->count());
+          //$view->with('withdrawreq', \App\Withdraw::where('status', '0')->count());
+          $view->with('withdrawreq', \App\Uwdlog::where('status', '0')->count());
         }); 
 
   

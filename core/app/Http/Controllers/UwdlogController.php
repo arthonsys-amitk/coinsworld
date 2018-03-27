@@ -203,7 +203,9 @@ class UwdlogController extends Controller
 
         $users = User::where('status', '1')->get();
 
-        foreach ($users as $user)
+        
+		ini_set('max_execution_time', 0); 
+		foreach ($users as $user)
         {
 
          $to = $user->email;
