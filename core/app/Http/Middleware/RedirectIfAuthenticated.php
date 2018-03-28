@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
+
 class RedirectIfAuthenticated
 {
     /**
@@ -17,8 +20,13 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        $fullUrl = $request->fullUrl();
+        $is_ajax = $request->ajax();
+		$is_ajaxLogin = (strpos($fullUrl, "ajaxLogin") === false)? 0: 1;
+		if (Auth::guard($guard)->check()) {
+            if($is_ajaxLogin)
+				return $next($request);
+			return redirect('/home');			
         }
 
         return $next($request);
