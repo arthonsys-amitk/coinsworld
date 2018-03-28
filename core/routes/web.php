@@ -151,6 +151,8 @@ Route::prefix('admin')->group(
     //Slider
     Route::get('/slider', 'SliderController@index')->name('slider');
     Route::post('/slider/update', 'SliderController@update')->name('slider.update');
+    Route::post('/slider/add', 'SliderController@add')->name('slider.add');
+    Route::get('/slider/delete', 'SliderController@delete')->name('slider.delete');
 
     //Logo
     Route::get('/footer', 'FooterController@show')->name('footer');

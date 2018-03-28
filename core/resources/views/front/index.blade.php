@@ -2,8 +2,13 @@
 @section('content')
 
 <ul id="demo1">
-    <li><img src="{{ asset('assets/coinsworld/images/banner1.jpg') }}"/></li>
-    <li><img src="{{ asset('assets/coinsworld/images/banner2.jpg') }}" /></li>
+	@foreach($banners as $slider)
+		@if($slider->link)
+			<li><a href="{{$slider->link}}" target="_blank"><img src="{{ asset('assets/images/slider') }}/{{$slider->image}}" alt="Image" /></a></li>
+		@else
+			<li><img src="{{ asset('assets/images/slider') }}/{{$slider->image}}" alt="Image" /></li>		
+		@endif
+	@endforeach
 </ul>
 
 

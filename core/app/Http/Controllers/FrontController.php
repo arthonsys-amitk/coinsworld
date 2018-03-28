@@ -42,12 +42,13 @@ class FrontController extends Controller
         $mval = ($sup->supply-$user)/1000000;
 
         $banner = Slider::first();
+		$banners = Slider::orderBy('position', 'asc')->get();
         $about = About::first();
         $items = Testimonial::all();
         $times = Timeline::all();
         $service = Service::pluck('heading')->first();
 
-    	return view('front.index', compact('banner','times','allprice','currentRate','price','supply','mval','about','items','service'));
+    	return view('front.index', compact('banner','times','allprice','currentRate','price','supply','mval','about','items','service','banners'));
     }
 
     public function page($id)
