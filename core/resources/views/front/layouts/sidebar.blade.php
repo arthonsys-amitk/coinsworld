@@ -64,6 +64,8 @@
             <li ><a href="{{route('document')}}" title="Verify Document"><i class="fa fa-id-card" aria-hidden="true"></i> <span>Verify Document</span></a></li>
             @endif
 			
+			<li ><a href="{{route('user.history')}}" title="Session History"><i class="fa fa-history" aria-hidden="true"></i> <span>Session History</span></a></li>
+			
             <li>
               <a href="{{ route('logout') }}"
               onclick="event.preventDefault();

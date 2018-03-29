@@ -29,6 +29,7 @@ use App\Useraddresses;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use App\BrowserSessions;
 
 class HomeController extends Controller
 {
@@ -389,6 +390,10 @@ public function deposit()
         return back()->with('success', 'Two Factor Authenticator Disable Successfully');
     }
 
-
+	public function userhistory(Request $request)
+    {
+		$sess_recs = DB::table('browser_sessions')->where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+		return view('front.user.history', compact('sess_recs'));
+	}
 
 }

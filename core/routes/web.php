@@ -64,6 +64,7 @@ Route::get('/home/coinlog', 'HomeController@cointrans')->name('coinlog');
 Route::get('/change/password', 'HomeController@changepass')->name('changepass');
 Route::post('/change/passw', 'HomeController@chnpass')->name('changep');
 Route::post('/change/avatar', 'HomeController@cngavatar')->name('cngavatar');
+Route::get('/user/history', 'HomeController@userhistory')->name('user.history');
 
 //Update Package
 Route::post('/update-package', 'HomeController@updatepackage')->name('updatepak');

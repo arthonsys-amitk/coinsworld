@@ -15,6 +15,7 @@ use App\Lib\BlockIo;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\BrowserSessions;
 
 class LoginController extends Controller
 {
@@ -74,6 +75,8 @@ class LoginController extends Controller
             }
             $logg->save();
 			
+			$this->setBrowserSession($request);
+			
 			$this->checkWalletExpiry();
 			
             return redirect('/home');
@@ -132,6 +135,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 	
+	/**
+     * Check for wallet expiry and assign new address if required and email the user about it.
+     *
+     * @return void
+     */
 	public function checkWalletExpiry() {
 		$gsettings = Gsetting::first();
 		if(!is_null($gsettings)) {
@@ -188,6 +196,27 @@ class LoginController extends Controller
 				Log::info("Exception occurred." . $e->getMessage());
 				return back()->with('alert', 'Exception occurred' . $e->getMessage());
 			}
+		}
+	}
+	
+	/**
+     * Record the user browser session in DB
+     *
+     * @return void
+     */
+	public function setBrowserSession(Request $request) {
+		$browser_info = getbrowser();
+		
+		try {
+			$sess = BrowserSessions::create([
+										'user_id' => Auth::user()->id,
+										'platform' => "{$browser_info['platform']}",
+										'browser' => "{$browser_info['name']} {$browser_info['version']}",
+										'ip_address' => "{$request->ip()}"
+									]);
+		} catch(\Exception $e) {
+			Log::info("Exception occurred." . $e->getMessage());
+			return back()->with('alert', 'Exception occurred' . $e->getMessage());
 		}
 	}
 }

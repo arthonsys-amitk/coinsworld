@@ -36,7 +36,11 @@
                                 </select>
                             </div>
                         </li>
-                        <li><a href="#" data-toggle="modal" data-target="#signin">Login</a></li>
+						@if(Auth::id())
+							<li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Sign Out">Logout</a></li>
+						@else
+							<li><a href="#" data-toggle="modal" data-target="#signin">Login</a></li>
+						@endif
                         <li class="signup"><a href="#" data-toggle="modal" data-target="#signup">Sign Up</a></li>
                     </ul>
                     <div class="clearfix"></div>
@@ -460,6 +464,9 @@
                 <!--/.nav-collapse --> 
             </div>
         </nav>
+		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+        </form>
   <!--main menu section end-->
 @include('front.layouts.message')
 @yield('content')
